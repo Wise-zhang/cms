@@ -1,0 +1,539 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>新闻资讯 - DTcms网站管理系统</title>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/date.js"></script>
+
+    <script type="text/javascript">
+        <!-- 开始轮播图动画 -->
+        $(function () {
+            $("#focus-box").flexslider({
+                directionNav: false,
+                pauseOnAction: false
+            });
+        });
+    </script>
+</head>
+
+<body id="news">
+
+<!--页面头部-->
+<div id="header"></div>
+<script>$("#header").load("_header.html");</script>
+<!--/页面头部-->
+
+<div id="app">
+
+    <!--当前位置-->
+    <div class="section">
+        <div class="location">
+            <span>当前位置：</span>
+            <a href="">首页</a> &gt;
+            <a href="">新闻资讯</a>
+        </div>
+    </div>
+    <!--/当前位置-->
+
+    <!--推荐资讯-->
+    <div class="section">
+        <div class="wrapper clearfix">
+            <div class="wrap-box">
+                <div class="left-455" style="margin:0;height:341px;">
+                    <div id="focus-box" class="focus-box">
+
+                        <!-- 轮播图 -->
+                        <ul class="slides">
+                            <li>
+                                <a title="京东全球购将会沦为“海外代购”" href="">
+                                    <span class="note-bg"></span>
+                                    <span class="note-txt">京东全球购将会沦为“海外代购”</span>
+                                    <img src=""/>
+                                </a>
+                            </li>
+                            <li>
+                                <a title="京东全球购将会沦为“海外代购”" href="">
+                                    <span class="note-bg"></span>
+                                    <span class="note-txt">京东全球购将会沦为“海外代购”</span>
+                                    <img src=""/>
+                                </a>
+                            </li>
+                            <li>
+                                <a title="京东全球购将会沦为“海外代购”" href="">
+                                    <span class="note-bg"></span>
+                                    <span class="note-txt">京东全球购将会沦为“海外代购”</span>
+                                    <img src=""/>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+
+                <!-- 每5条的第一条,字体高亮突出 -->
+                <div class="left-455">
+                    <ul class="side-txt-list">
+                        <li class="tit"><a href="">京东全球购将会沦为“海外代购”</a></li>
+                        <li><span>2015-04-17</span><a href="">三星中国手机份额降至8% 国产厂商发起海外包抄</a></li>
+                        <li><span>2015-04-17</span><a href="">三星中国手机份额降至8% 国产厂商发起海外包抄</a></li>
+                        <li><span>2015-04-17</span><a href="">三星中国手机份额降至8% 国产厂商发起海外包抄</a></li>
+                        <li><span>2015-04-17</span><a href="">三星中国手机份额降至8% 国产厂商发起海外包抄</a></li>
+
+                        <li class="tit"><a href="">购房者最看重房贷优惠 二套房利率上浮5%</a></li>
+                        <li><span>2015-04-17</span><a href="">今年海外购房额或达350亿美元 中国房东将遍布世界</a></li>
+                        <li><span>2015-04-17</span><a href="">今年海外购房额或达350亿美元 中国房东将遍布世界</a></li>
+                        <li><span>2015-04-17</span><a href="">今年海外购房额或达350亿美元 中国房东将遍布世界</a></li>
+                        <li><span>2015-04-17</span><a href="">今年海外购房额或达350亿美元 中国房东将遍布世界</a></li>
+                    </ul>
+                </div>
+
+                <div class="left-220">
+                    <ul class="side-img-list">
+                        <li>
+                            <div class="img-box">
+                                <label>1</label>
+                                <img src=""/>
+                            </div>
+                            <div class="txt-box">
+                                <a href="">易车总裁邵京宁：汽车行业电商化的三个阶段</a>
+                                <span>2015-04-16</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="img-box">
+                                <label>2</label>
+                                <img src=""/>
+                            </div>
+                            <div class="txt-box">
+                                <a href="">易车总裁邵京宁：汽车行业电商化的三个阶段</a>
+                                <span>2015-04-16</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="img-box">
+                                <label>3</label>
+                                <img src=""/>
+                            </div>
+                            <div class="txt-box">
+                                <a href="">易车总裁邵京宁：汽车行业电商化的三个阶段</a>
+                                <span>2015-04-16</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="img-box">
+                                <label>4</label>
+                                <img src=""/>
+                            </div>
+                            <div class="txt-box">
+                                <a href="">易车总裁邵京宁：汽车行业电商化的三个阶段</a>
+                                <span>2015-04-16</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--/推荐资讯-->
+
+    <!--分类推荐-->
+    <div class="section">
+
+        <!--子类-->
+        <div class="main-tit">
+            <h2>互联网媒体</h2>
+            <p>
+                <a href="">人物动态</a>
+                <a href="">电子商务</a>
+                <a href="">传闻爆料</a>
+                <a href="">更多<i>+</i></a>
+            </p>
+        </div>
+
+        <!--/子类-->
+        <div class="wrapper clearfix">
+            <div class="wrap-box">
+                <!--左边-->
+                <div class="left-925">
+                    <div class="pad-15 bg-wrap">
+                        <ul class="rel-list">
+
+                            <li>
+                                <div class="img-box">
+                                    <a title="电商下乡，京东、苏宁、阿里农村遭遇战打响？" href="">
+                                        <img src="">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <h3><a title="电商下乡，京东、苏宁、阿里农村遭遇战打响？"
+                                           href="">电商下乡，京东、苏宁、阿里农村遭遇战打响？</a>
+                                    </h3>
+                                    <p>
+                                        2015年，各大电商逐鹿广袤的农村市场，一场圈地运动正在上演，焦点之战在家电市场首先展开。4月9日，京东公布农村电商发展的阶段性成果，其中定位于农村大家电营销、配送、安装、维修的京东帮服务店表现抢眼——4个月时间，开设了超过…</p>
+                                    <span>2015/4/16 13:29:20</span>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="img-box">
+                                    <a title="电商下乡，京东、苏宁、阿里农村遭遇战打响？" href="">
+                                        <img src="">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <h3><a title="电商下乡，京东、苏宁、阿里农村遭遇战打响？"
+                                           href="">电商下乡，京东、苏宁、阿里农村遭遇战打响？</a>
+                                    </h3>
+                                    <p>
+                                        2015年，各大电商逐鹿广袤的农村市场，一场圈地运动正在上演，焦点之战在家电市场首先展开。4月9日，京东公布农村电商发展的阶段性成果，其中定位于农村大家电营销、配送、安装、维修的京东帮服务店表现抢眼——4个月时间，开设了超过…</p>
+                                    <span>2015/4/16 13:29:20</span>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="img-box">
+                                    <a title="电商下乡，京东、苏宁、阿里农村遭遇战打响？" href="">
+                                        <img src="">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <h3><a title="电商下乡，京东、苏宁、阿里农村遭遇战打响？"
+                                           href="">电商下乡，京东、苏宁、阿里农村遭遇战打响？</a>
+                                    </h3>
+                                    <p>
+                                        2015年，各大电商逐鹿广袤的农村市场，一场圈地运动正在上演，焦点之战在家电市场首先展开。4月9日，京东公布农村电商发展的阶段性成果，其中定位于农村大家电营销、配送、安装、维修的京东帮服务店表现抢眼——4个月时间，开设了超过…</p>
+                                    <span>2015/4/16 13:29:20</span>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="img-box">
+                                    <a title="电商下乡，京东、苏宁、阿里农村遭遇战打响？" href="">
+                                        <img src="">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <h3><a title="电商下乡，京东、苏宁、阿里农村遭遇战打响？"
+                                           href="">电商下乡，京东、苏宁、阿里农村遭遇战打响？</a>
+                                    </h3>
+                                    <p>
+                                        2015年，各大电商逐鹿广袤的农村市场，一场圈地运动正在上演，焦点之战在家电市场首先展开。4月9日，京东公布农村电商发展的阶段性成果，其中定位于农村大家电营销、配送、安装、维修的京东帮服务店表现抢眼——4个月时间，开设了超过…</p>
+                                    <span>2015/4/16 13:29:20</span>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <!--/左边-->
+
+                <!--右边-->
+                <div class="left-220">
+                    <div class="pad-15 bg-wrap">
+                        <ul class="focus-list">
+
+                            <li>
+                                <label class="hot">1</label>
+                                <a href="upload">中国首个东盟电子商务平台“美丽湾”启动</a>
+                            </li>
+                            <li>
+                                <label>2</label>
+                                <a href="upload">中国首个东盟电子商务平台“美丽湾”启动</a>
+                            </li>
+                            <li>
+                                <label>3</label>
+                                <a href="upload">中国首个东盟电子商务平台“美丽湾”启动</a>
+                            </li>
+                            <li>
+                                <label>4</label>
+                                <a href="upload">中国首个东盟电子商务平台“美丽湾”启动</a>
+                            </li>
+                            <li>
+                                <label>5</label>
+                                <a href="upload">中国首个东盟电子商务平台“美丽湾”启动</a>
+                            </li>
+                            <li>
+                                <label>6</label>
+                                <a href="upload">中国首个东盟电子商务平台“美丽湾”启动</a>
+                            </li>
+                            <li>
+                                <label>7</label>
+                                <a href="upload">中国首个东盟电子商务平台“美丽湾”启动</a>
+                            </li>
+                            <li>
+                                <label>8</label>
+                                <a href="upload">中国首个东盟电子商务平台“美丽湾”启动</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <!--/右边-->
+            </div>
+        </div>
+
+        <!--子类-->
+        <div class="main-tit">
+            <h2>科技财经</h2>
+            <p>
+
+                <a href="">IT业界</a>
+
+                <a href="">经济民生</a>
+
+                <a href="">数码产品</a>
+
+                <a href="">更多<i>+</i></a>
+            </p>
+        </div>
+        <!--/子类-->
+        <div class="wrapper clearfix">
+            <div class="wrap-box">
+                <!--左边-->
+                <div class="left-925">
+                    <div class="pad-15 bg-wrap">
+                        <ul class="rel-list">
+
+                            <li>
+                                <div class="img-box">
+                                    <a title="京东全球购将会沦为“海外代购”" href="">
+                                        <img src="">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <h3><a title="京东全球购将会沦为“海外代购”" href="">京东全球购将会沦为“海外代购”</a></h3>
+                                    <p>
+                                        4月16日消息称，京东全球购业务正式上线，首批上线的进口商品超过15万种，品牌数量超过1200个，商铺超过450家。这是继天猫国际、亚马逊中国涉足跨境电商之后，又一家给中国“剁手党”们带来福利的电商公司。其实，早在电商公司涉足“海外购”业务之前，聪明智慧的中国人民…</p>
+                                    <span>2015/4/17 11:07:20</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="img-box">
+                                    <a title="京东全球购将会沦为“海外代购”" href="">
+                                        <img src="">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <h3><a title="京东全球购将会沦为“海外代购”" href="">京东全球购将会沦为“海外代购”</a></h3>
+                                    <p>
+                                        4月16日消息称，京东全球购业务正式上线，首批上线的进口商品超过15万种，品牌数量超过1200个，商铺超过450家。这是继天猫国际、亚马逊中国涉足跨境电商之后，又一家给中国“剁手党”们带来福利的电商公司。其实，早在电商公司涉足“海外购”业务之前，聪明智慧的中国人民…</p>
+                                    <span>2015/4/17 11:07:20</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="img-box">
+                                    <a title="京东全球购将会沦为“海外代购”" href="">
+                                        <img src="">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <h3><a title="京东全球购将会沦为“海外代购”" href="">京东全球购将会沦为“海外代购”</a></h3>
+                                    <p>
+                                        4月16日消息称，京东全球购业务正式上线，首批上线的进口商品超过15万种，品牌数量超过1200个，商铺超过450家。这是继天猫国际、亚马逊中国涉足跨境电商之后，又一家给中国“剁手党”们带来福利的电商公司。其实，早在电商公司涉足“海外购”业务之前，聪明智慧的中国人民…</p>
+                                    <span>2015/4/17 11:07:20</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="img-box">
+                                    <a title="京东全球购将会沦为“海外代购”" href="">
+                                        <img src="">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <h3><a title="京东全球购将会沦为“海外代购”" href="">京东全球购将会沦为“海外代购”</a></h3>
+                                    <p>
+                                        4月16日消息称，京东全球购业务正式上线，首批上线的进口商品超过15万种，品牌数量超过1200个，商铺超过450家。这是继天猫国际、亚马逊中国涉足跨境电商之后，又一家给中国“剁手党”们带来福利的电商公司。其实，早在电商公司涉足“海外购”业务之前，聪明智慧的中国人民…</p>
+                                    <span>2015/4/17 11:07:20</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--/左边-->
+
+                <!--右边-->
+                <div class="left-220">
+                    <div class="pad-15 bg-wrap">
+                        <ul class="focus-list">
+
+                            <li>
+                                <label class="hot">1</label>
+                                <a href="">京东全球购将会沦为“海外代购”</a>
+                            </li>
+
+                            <li>
+                                <label>2</label>
+                                <a href="">京东全球购将会沦为“海外代购”</a>
+                            </li>
+                            <li>
+                                <label>3</label>
+                                <a href="">京东全球购将会沦为“海外代购”</a>
+                            </li>
+                            <li>
+                                <label>4</label>
+                                <a href="upload">京东全球购将会沦为“海外代购”</a>
+                            </li>
+                            <li>
+                                <label>5</label>
+                                <a href="upload">京东全球购将会沦为“海外代购”</a>
+                            </li>
+                            <li>
+                                <label>6</label>
+                                <a href="upload">京东全球购将会沦为“海外代购”</a>
+                            </li>
+                            <li>
+                                <label>7</label>
+                                <a href="upload">京东全球购将会沦为“海外代购”</a>
+                            </li>
+                            <li>
+                                <label>8</label>
+                                <a href="upload">京东全球购将会沦为“海外代购”</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <!--/右边-->
+            </div>
+        </div>
+
+        <!--子类-->
+        <div class="main-tit">
+            <h2>汽车房产</h2>
+            <p>
+                <a href="">新车行情</a>
+
+                <a href="">房产动态</a>
+
+                <a href="">更多<i>+</i></a>
+            </p>
+        </div>
+        <!--/子类-->
+        <div class="wrapper clearfix">
+            <div class="wrap-box">
+                <!--左边-->
+                <div class="left-925">
+                    <div class="pad-15 bg-wrap">
+                        <ul class="rel-list">
+                            <li>
+                                <div class="img-box">
+                                    <a title="长城汽车不走高端很快就会死 哈弗H8卷土重来" href="">
+                                        <img src="">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <h3><a title="长城汽车不走高端很快就会死 哈弗H8卷土重来" href="">长城汽车不走高端很快就会死
+                                        哈弗H8卷土重来</a></h3>
+                                    <p>&amp;emsp;&amp;emsp;一辆豪华日系SUV是他的座驾，魏建军几乎是尾随参与试驾的媒体记者们而来。这位平素一贯喜欢一门心思扎在车间不爱应酬的长城汽车掌门人这天为何表现出少有的兴奋与热情？&amp;emsp;&amp;emsp;或许他是迫切地想知道，这些在道路试驾中前半段路程中试乘了保时…</p>
+                                    <span>2015/4/16 12:29:50</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="img-box">
+                                    <a title="长城汽车不走高端很快就会死 哈弗H8卷土重来" href="">
+                                        <img src="">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <h3><a title="长城汽车不走高端很快就会死 哈弗H8卷土重来" href="">长城汽车不走高端很快就会死
+                                        哈弗H8卷土重来</a></h3>
+                                    <p>&amp;emsp;&amp;emsp;一辆豪华日系SUV是他的座驾，魏建军几乎是尾随参与试驾的媒体记者们而来。这位平素一贯喜欢一门心思扎在车间不爱应酬的长城汽车掌门人这天为何表现出少有的兴奋与热情？&amp;emsp;&amp;emsp;或许他是迫切地想知道，这些在道路试驾中前半段路程中试乘了保时…</p>
+                                    <span>2015/4/16 12:29:50</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="img-box">
+                                    <a title="长城汽车不走高端很快就会死 哈弗H8卷土重来" href="">
+                                        <img src="">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <h3><a title="长城汽车不走高端很快就会死 哈弗H8卷土重来" href="">长城汽车不走高端很快就会死
+                                        哈弗H8卷土重来</a></h3>
+                                    <p>&amp;emsp;&amp;emsp;一辆豪华日系SUV是他的座驾，魏建军几乎是尾随参与试驾的媒体记者们而来。这位平素一贯喜欢一门心思扎在车间不爱应酬的长城汽车掌门人这天为何表现出少有的兴奋与热情？&amp;emsp;&amp;emsp;或许他是迫切地想知道，这些在道路试驾中前半段路程中试乘了保时…</p>
+                                    <span>2015/4/16 12:29:50</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="img-box">
+                                    <a title="长城汽车不走高端很快就会死 哈弗H8卷土重来" href="">
+                                        <img src="">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <h3><a title="长城汽车不走高端很快就会死 哈弗H8卷土重来" href="">长城汽车不走高端很快就会死
+                                        哈弗H8卷土重来</a></h3>
+                                    <p>&amp;emsp;&amp;emsp;一辆豪华日系SUV是他的座驾，魏建军几乎是尾随参与试驾的媒体记者们而来。这位平素一贯喜欢一门心思扎在车间不爱应酬的长城汽车掌门人这天为何表现出少有的兴奋与热情？&amp;emsp;&amp;emsp;或许他是迫切地想知道，这些在道路试驾中前半段路程中试乘了保时…</p>
+                                    <span>2015/4/16 12:29:50</span>
+                                </div>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </div>
+                <!--/左边-->
+
+                <!--右边-->
+                <div class="left-220">
+                    <div class="pad-15 bg-wrap">
+                        <ul class="focus-list">
+
+                            <li>
+                                <label class="hot">1</label>
+                                <a href="">深圳限购限行后首次公车拍卖 近三成流拍</a>
+                            </li>
+
+                            <li>
+                                <label>2</label>
+                                <a href="">深圳限购限行后首次公车拍卖 近三成流拍</a>
+                            </li>
+                            <li>
+                                <label>2</label>
+                                <a href="">深圳限购限行后首次公车拍卖 近三成流拍</a>
+                            </li>
+                            <li>
+                                <label>2</label>
+                                <a href="">深圳限购限行后首次公车拍卖 近三成流拍</a>
+                            </li>
+                            <li>
+                                <label>2</label>
+                                <a href="">深圳限购限行后首次公车拍卖 近三成流拍</a>
+                            </li>
+                            <li>
+                                <label>2</label>
+                                <a href="">深圳限购限行后首次公车拍卖 近三成流拍</a>
+                            </li>
+                            <li>
+                                <label>2</label>
+                                <a href="">深圳限购限行后首次公车拍卖 近三成流拍</a>
+                            </li>
+                            <li>
+                                <label>2</label>
+                                <a href="">深圳限购限行后首次公车拍卖 近三成流拍</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <!--/右边-->
+            </div>
+        </div>
+
+    </div>
+    <!--/分类推荐-->
+</div>
+
+<!--页面底部-->
+<div id="footer"></div>
+<script>$("#footer").load("_footer.html");</script>
+<!--/页面底部-->
+
+</body>
+</html>

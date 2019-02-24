@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>购物车 - DTcms网站管理系统</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript">
+    $.get("http://127.0.0.1:8000/test/", function (dat) {
+        alert(dat);
+    });
+    </script>
+</head>
+
+<body>
+
+<!--页面头部-->
+<div id="header"></div>
+<script>$("#header").load("_header.html");</script>
+<!--/页面头部-->
+
+<!--当前位置-->
+<div class="section">
+    <div class="location">
+        <span>当前位置：</span>
+        <a href="index.html">首页</a> &gt;
+        <a href="cart.html">购物车</a>
+    </div>
+</div>
+<!--/当前位置-->
+<div id="app">
+
+    <!--页面内容-->
+    <div class="section">
+        <div class="wrapper">
+            <div class="bg-wrap">
+                <!--购物车头部-->
+                <div class="cart-head clearfix">
+                    <h2><i class="iconfont icon-cart"></i>我的购物车</h2>
+                    <div class="cart-setp">
+                        <ul>
+                            <li class="first active">
+                                <div class="progress">
+                                    <span>1</span>
+                                    放进购物车
+                                </div>
+                            </li>
+                            <li>
+                                <div class="progress">
+                                    <span>2</span>
+                                    填写订单信息
+                                </div>
+                            </li>
+                            <li class="last">
+                                <div class="progress">
+                                    <span>3</span>
+                                    支付/确认订单
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--购物车头部-->
+
+                <!--商品列表-->
+                <div class="cart-box">
+                    <input id="jsondata" name="jsondata" type="hidden"/>
+                    <table width="100%" align="center" class="cart-table"
+                           border="0" cellspacing="0" cellpadding="8">
+
+                        <tr>
+                            <th width="48" align="center">
+                            </th>
+                            <th align="left" colspan="2">商品信息</th>
+                            <th width="84" align="left">单价</th>
+                            <th width="104" align="center">数量</th>
+                            <th width="104" align="left">金额(元)</th>
+                            <th width="54" align="center">操作</th>
+                        </tr>
+
+                        <!-- 第1条数据 -->
+                        <tr>
+                            <td align="center">
+                            </td>
+                            <td width="68">
+                                <a target="_blank" href="/goods/show-89.html">
+                                    <img src="/upload/201504/20/thumb_201504200119256512.jpg" class="img"/>
+                                </a>
+                            </td>
+                            <td>
+                                <a target="_blank" href="/goods/show-89.html">小米（Mi）小米Note 16G双网通版</a>
+                            </td>
+                            <td>
+                                ￥2299.00
+                            </td>
+                            <td align="center">
+                                <div class="buy-box">
+                                    <a href="javascript:;" class="reduce" onclick="">-</a>
+                                    <input type="text" name="goodsQuantity" class="input" value="1"
+                                           onkeydown="return checkNumber(event);"/>
+                                    <a href="javascript:;" class="subjoin" onclick="">+</a>
+                                </div>
+                            </td>
+                            <td>
+                            <span class="red">
+                                ￥<label name="amountCount">2299.00</label>
+                            </span>
+                            </td>
+                            <td align="center">
+                                <a onclick="" href="javascript:;">删除</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="10" style="display: none">
+                                <div class="msg-tips">
+                                    <div class="icon warning"><i class="iconfont icon-tip"></i></div>
+                                    <div class="info">
+                                        <strong>购物车没有商品！</strong>
+                                        <p>您的购物车为空，<a href="/index.html">马上去购物</a>吧！</p>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr class="table-footer">
+                            <th align="left" colspan="3">
+                                <input type="checkbox" class="check_all"/>
+                                <label>全选</label>
+                            </th>
+                            <th align="right" colspan="8">
+                                已选择商品 <b class="red" id="totalQuantity">0</b> 件 &nbsp;&nbsp;&nbsp;
+                                商品总金额（不含运费）：<span class="red">￥</span>
+                                <b class="red" id="totalAmount">0.0</b>元
+                            </th>
+                        </tr>
+
+                    </table>
+                </div>
+                <!--/商品列表-->
+
+                <!--购物车底部-->
+                <div class="cart-foot clearfix">
+                    <div class="left-box">
+                    </div>
+                    <div class="right-box">
+                        <button class="submit">立即结算</button>
+                    </div>
+                </div>
+                <!--购物车底部-->
+
+            </div>
+        </div>
+    </div>
+    <!--/页面内容-->
+</div>
+
+<!--页面底部-->
+<div id="footer"></div>
+<script>$("#footer").load("_footer.html");</script>
+<!--/页面底部-->
+
+<script src="js/axios-0.18.0.min.js"></script>
+<script src="js/vue-2.5.16.js"></script>
+<script src="js/cart.js"></script>
+
+</body>
+</html>

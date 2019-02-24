@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>我的积分 - DTcms网站管理系统</title>
+    <link rel="stylesheet" type="text/css" href="js/ui-dialog.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <script type="text/javascript" charset="utf-8" src="js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="scripts/artdialog/dialog-plus-min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/common.js"></script>
+
+    <script>
+        // 用户未登录,则中转到登录界面
+        let token = sessionStorage.token || localStorage.token;
+        if (!token) {
+            location.href = '/login.html';
+        }
+    </script>
+
+</head>
+
+<body>
+
+<!--页面头部-->
+<div id="header"></div>
+<script>$("#header").load("_header.html");</script>
+<!--/页面头部-->
+
+<!--当前位置-->
+<div class="section">
+    <div class="location">
+        <span>当前位置：</span>
+        <a href="">首页</a> &gt;
+        <a href="">会员中心</a>&gt;
+        <a href="">地址管理</a>
+    </div>
+</div>
+<!--/当前位置-->
+
+<div class="section clearfix">
+    <!--页面左边-->
+    <div class="left-260">
+        <div class="bg-wrap">
+            <div class="avatar-box">
+                <a class="img-box" href="">
+                    <i class="iconfont icon-user-full"></i>
+                </a>
+                <h3>
+                    django
+                </h3>
+                <p><b>注册会员</b></p>
+            </div>
+
+            <div class="center-nav">
+                <ul>
+                    <li>
+                        <h2>
+                            <i class="iconfont icon-user"></i>
+                            <span>地址管理</span>
+                        </h2>
+                        <div class="list">
+                            <p><a href="user_center_address.html"><i class="iconfont icon-arrow-right"></i>地址列表</a></p>
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <!--/页面左边-->
+
+    <!--页面右边-->
+    <div class="right-auto">
+        <div class="bg-wrap" style="min-height:765px;">
+            <div class="sub-tit">
+                <a class="add" href="javascript:history.go(-1);">
+                    <i class="iconfont icon-reply"></i>返回</a>
+                <span>新增地址</span>
+            </div>
+
+            <div class="form-box address-info">
+                <dl class="form-group">
+                    <dt>*收货人姓名：</dt>
+                    <dd>
+                        <input name="book_id" id="book_id" type="hidden" value="0"/>
+                        <input name="accept_name" id="accept_name" type="text" class="input" value="" datatype="s2-20"
+                               sucmsg=" "/>
+                    </dd>
+                </dl>
+                <dl class="form-group">
+                    <dt>*所属地区：</dt>
+                    <dd>
+                        <select id="province" name="province" class="select" style="width: 100px"></select>
+                        <select id="city" name="city" class="select" style="width: 100px"></select>
+                        <select id="area" name="area" class="select" datatype="*" style="width: 100px"></select>
+                    </dd>
+                </dl>
+                <dl class="form-group">
+                    <dt>*详细地址：</dt>
+                    <dd>
+                        <input name="address" id="address" type="text" class="input" value="" />
+                    </dd>
+                </dl>
+                <dl class="form-group">
+                    <dt>*手机号码：</dt>
+                    <dd>
+                        <input name="mobile" id="mobile" type="text" class="input" value="" />
+                    </dd>
+                </dl>
+                <dl class="form-group">
+                    <dt>固定电话：</dt>
+                    <dd>
+                        <input name="telphone" id="telphone" type="text" class="input" value=""/>
+                    </dd>
+                </dl>
+                <dl class="form-group">
+                    <dt>电子邮箱：</dt>
+                    <dd>
+                        <input name="email" id="email" type="text" class="input" value=""/>
+                    </dd>
+                </dl>
+
+                <div class="page-foot" style="margin-left: 50px; margin-top: 20px;">
+                    <div class="btn-box">
+                        <a href="">保存地址</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--/页面右边-->
+</div>
+
+<!--页面底部-->
+<div id="footer"></div>
+<script>$("#footer").load("_footer.html");</script>
+<!--/页面底部-->
+
+</body>
+</html>

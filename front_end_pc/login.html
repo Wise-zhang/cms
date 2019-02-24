@@ -1,0 +1,71 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>会员登录 - DTcms网站管理系统</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="scripts/jquery/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+</head>
+
+<body>
+
+<!--页面头部-->
+<div id="header"></div>
+<script>$("#header").load("_header.html");</script>
+<!--/页面头部-->
+
+<!--当前位置-->
+<div class="section">
+    <div class="location">
+        <span>当前位置：</span>
+        <a href="index.html">首页</a> &gt;
+        <a href="login.html">会员登录</a>
+    </div>
+</div>
+<!--/当前位置-->
+
+<!--导航推荐-->
+<div class="section">
+    <div class="wrapper">
+        <div class="bg-wrap">
+            <div class="nav-tit">
+                <a class="selected" href="javascript:;">账户登录</a>
+                <i>|</i>
+                <a href="register.html">免费注册</a>
+            </div>
+
+            <form id="loginform" name="loginform" class="login-box">
+                <div class="input-box">
+                    <input id="txtUserName" name="username" type="text"
+                           placeholder="用户名/手机/邮箱"/>
+                </div>
+                <div class="input-box">
+                    <input id="txtPassword" name="password" type="password"
+                           placeholder="输入登录密码"/>
+                </div>
+                <div class="remember-box">
+                    <input id="chkRemember" name="remember" type="checkbox"/>
+                    <label for="chkRemember">记住登录状态</label>
+                </div>
+                <div class="btn-box">
+                    <input id="btnSubmit" name="btnSubmit" type="submit" value="立即登录">
+                </div>
+                <!-- 出错提示信息 -->
+                <div id="error_msg" class="tip-box"></div>
+
+                <input id="turl" name="turl" type="hidden"
+                       value="/user/center/index.html"/>
+                <!--记住上一页网址-->
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--页面底部-->
+<div id="footer"></div>
+<script>$("#footer").load("_footer.html");</script>
+<!--/页面底部-->
+
+</body>
+</html>
