@@ -19,5 +19,4 @@ from django.contrib import admin
 from users import views
 
 urlpatterns = [
-    url(r'^test/$', views.test),
 ]
