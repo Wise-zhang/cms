@@ -6,11 +6,18 @@
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
-    <script type="text/javascript">
-    $.get("http://127.0.0.1:8000/test/", function (dat) {
-        alert(dat);
-    });
+
+    <script>
+        // 用户未登录,则中转到登录界面
+        let token = sessionStorage.token || localStorage.token;
+        if (!token) {
+            location.href = '/login.html';
+        }
+{#        $.get("http://127.0.0.1:8000/test/", function (dat) {#}
+{#            alert(dat);#}
+{#        });#}
     </script>
+
 </head>
 
 <body>
@@ -80,40 +87,44 @@
                         </tr>
 
                         <!-- 第1条数据 -->
-                        <tr>
+                        <tr v-for="(goods, index) in goods_list" v-cloak>
                             <td align="center">
+                                <input type="checkbox" name="checkall" class="checkall"
+                                       v-model="goods.selected"/>
                             </td>
                             <td width="68">
-                                <a target="_blank" href="/goods/show-89.html">
-                                    <img src="/upload/201504/20/thumb_201504200119256512.jpg" class="img"/>
+                                <a target="_blank" href="/goods/show-98.html">
+                                    <img :src="goods.img_url" class="img"/>
                                 </a>
                             </td>
                             <td>
-                                <a target="_blank" href="/goods/show-89.html">小米（Mi）小米Note 16G双网通版</a>
+                                <a target="_blank" :href="'goods_detail.html?id=' + goods.id">{{ goods.title }}</a>
                             </td>
                             <td>
-                                ￥2299.00
+                                ￥{{ goods.sell_price }}
                             </td>
                             <td align="center">
                                 <div class="buy-box">
-                                    <a href="javascript:;" class="reduce" onclick="">-</a>
-                                    <input type="text" name="goodsQuantity" class="input" value="1"
+                                    <a href="javascript:;" class="reduce" @click="on_minus(index)">-</a>
+                                    <input type="text" name="goodsQuantity" class="input" v-model="goods.count"
+                                           @blur="on_input(index)" @focus="origin_input=goods.count"
                                            onkeydown="return checkNumber(event);"/>
-                                    <a href="javascript:;" class="subjoin" onclick="">+</a>
+                                    <a href="javascript:;" class="subjoin" @click="on_add(index)">+</a>
                                 </div>
                             </td>
+
                             <td>
                             <span class="red">
-                                ￥<label name="amountCount">2299.00</label>
+                                ￥<label name="amountCount">{{ goods.amount }}</label>
                             </span>
                             </td>
                             <td align="center">
-                                <a onclick="" href="javascript:;">删除</a>
+                                <a @click="delete_goods(index)" href="javascript:;">删除</a>
                             </td>
                         </tr>
 
-                        <tr>
-                            <td colspan="10" style="display: none">
+                        <tr v-if="goods_list.length === 0">
+                            <td colspan="10">
                                 <div class="msg-tips">
                                     <div class="icon warning"><i class="iconfont icon-tip"></i></div>
                                     <div class="info">
@@ -126,13 +137,14 @@
 
                         <tr class="table-footer">
                             <th align="left" colspan="3">
-                                <input type="checkbox" class="check_all"/>
+                                <input type="checkbox" class="check_all"
+                                       v-model="select_all" @click="on_select_all()"/>
                                 <label>全选</label>
                             </th>
                             <th align="right" colspan="8">
-                                已选择商品 <b class="red" id="totalQuantity">0</b> 件 &nbsp;&nbsp;&nbsp;
+                                已选择商品 <b class="red" id="totalQuantity">{{ selected_count }}</b> 件 &nbsp;&nbsp;&nbsp;
                                 商品总金额（不含运费）：<span class="red">￥</span>
-                                <b class="red" id="totalAmount">0.0</b>元
+                                <b class="red" id="totalAmount">{{ selected_amount }}</b>元
                             </th>
                         </tr>
 

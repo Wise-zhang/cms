@@ -8,7 +8,6 @@
     <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
-	<script type="text/javascript" src="js/date.js"></script>
 </head>
 
 <body id="goods">
@@ -26,8 +25,16 @@
             <span>当前位置：</span>
             <a href="index.html">首页</a> &gt;
             <a href="goods.html">购物商城</a>
-            &gt; <a href="">手机数码</a>
-            &gt; <a href="">手机通讯</a>
+
+            <!-- 面包屑导航 -->
+            <template v-if="category.parent !== null">
+                &nbsp;&gt;&nbsp;<a :href="'list.html?category=' + category.parent.id">{{ category.parent.title }}</a>&nbsp;&gt;&nbsp;
+                <a :href="'list.html?category=' + category.id">{{ category.title }}</a>
+            </template>
+            <template v-else>
+                &gt;&nbsp;<a :href="'list.html?category=' + category.id">{{ category.title }}</a>
+            </template>
+
         </div>
     </div>
     <!--/当前位置-->
@@ -38,13 +45,14 @@
 
             <!--/分类-->
             <div class="sort-box">
-                <a class="selected" href="">上架时间</a>
-                <a href="">按人气</a>
 
-                <a href="">价格从高到低</a>
+                <a @click="on_sort('create_time')" :class="ordering=='create_time'?'selected':''" >上架时间</a>
+                <a @click="on_sort('sales')" :class="ordering=='sales'?'selected':''" >按人气</a>
+                <a @click="on_sort('sell_price')" :class="ordering=='sell_price'?'selected':''" >价格从高到低</a>
+                <a @click="on_sort('-sell_price')" :class="ordering=='-sell_price'?'selected':''" >价格从低到高</a>
 
-                <a href="">价格从低到高</a>
             </div>
+
         </div>
     </div>
     <!--/分类导航-->
@@ -53,85 +61,25 @@
     <div class="section">
         <div class="wrapper clearfix">
             <ul class="img-list">
-                <li>
-                    <a href="">
-                        <div class="img-box">
-                            <img src=""/>
-                        </div>
-                        <div class="info">
-                            <h3>Shinco/新科 S2300 无线麦克风 无线手持话筒 双手麦 KTV 舞台</h3>
-                            <p class="price"><b>¥199.00</b>元</p>
-                            <p>
-                                <strong>库存 20</strong>
-                                <span>市场价：<s>269.00</s></span>
-                            </p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <div class="img-box">
 
-                            <img src=""/>
-                        </div>
-                        <div class="info">
-                            <h3>Shinco/新科 S2300 无线麦克风 无线手持话筒 双手麦 KTV 舞台</h3>
-                            <p class="price"><b>¥199.00</b>元</p>
-                            <p>
-                                <strong>库存 20</strong>
-                                <span>市场价：<s>269.00</s></span>
-                            </p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
+                <!-- 循环显示多个商品信息 -->
+                <li v-for="(goods, index) in goods_list">
+                    <a :href="'goods_detail.html?id=' + goods.id">
                         <div class="img-box">
-
-                            <img src=""/>
+                            <img :src="goods.img_url"/>
                         </div>
+
                         <div class="info">
-                            <h3>Shinco/新科 S2300 无线麦克风 无线手持话筒 双手麦 KTV 舞台</h3>
-                            <p class="price"><b>¥199.00</b>元</p>
+                            <h3>{{ goods.title }}</h3>
+                            <p class="price">¥{{ goods.sell_price }} 元</p>
                             <p>
-                                <strong>库存 20</strong>
-                                <span>市场价：<s>269.00</s></span>
+                                <strong>库存: {{ goods.stock }}</strong>
+                                <span>市场价：<s>{{ goods.market_price }}</s></span>
                             </p>
                         </div>
                     </a>
                 </li>
-                <li>
-                    <a href="">
-                        <div class="img-box">
 
-                            <img src=""/>
-                        </div>
-                        <div class="info">
-                            <h3>Shinco/新科 S2300 无线麦克风 无线手持话筒 双手麦 KTV 舞台</h3>
-                            <p class="price"><b>¥199.00</b>元</p>
-                            <p>
-                                <strong>库存 20</strong>
-                                <span>市场价：<s>269.00</s></span>
-                            </p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <div class="img-box">
-
-                            <img src=""/>
-                        </div>
-                        <div class="info">
-                            <h3>Shinco/新科 S2300 无线麦克风 无线手持话筒 双手麦 KTV 舞台</h3>
-                            <p class="price"><b>¥199.00</b>元</p>
-                            <p>
-                                <strong>库存 20</strong>
-                                <span>市场价：<s>269.00</s></span>
-                            </p>
-                        </div>
-                    </a>
-                </li>
             </ul>
 
             <!--页码列表-->
@@ -148,6 +96,10 @@
 <div id="footer"></div>
 <script>$("#footer").load("_footer.html");</script>
 <!--/页面底部-->
+
+<script type="text/javascript" src="js/vue-2.5.16.js"></script>
+<script type="text/javascript" src="js/axios-0.18.0.min.js"></script>
+<script src="js/list.js"></script>
 
 </body>
 </html>

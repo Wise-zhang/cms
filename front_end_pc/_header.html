@@ -1,25 +1,26 @@
 ﻿<!--页面头部-->
-
 <div class="header">
     <div class="head-top">
         <div class="section">
             <div class="left-box">
                 <span>网站链接：</span>
-                <a target="_blank" href="http://www.dtcms.net">动力启航官网</a>
-                <a target="_blank" href="http://demo.dtcms.net">DTcms演示站</a>
+                <a target="_blank" href="">动力启航官网</a>
+                <a target="_blank" href="">DTcms演示站</a>
             </div>
 
-            <div id="menu" class="right-box">
+            <div id="menu" class="right-box" v-cloak>
+                <!-- 已经登录 -->
+                <template v-if="username !== undefined">
+                    <a href="user_center_address.html">欢迎您，{{ username }}</a><strong>|</strong>
+                    <a href="" @click="logout()">退出</a>
+                </template>
+                <!-- 未登录 -->
+                <template v-else>
+                     <a href="register.html">注册</a><strong>|</strong>
+                     <a href="login.html">登录</a>
+                </template>
 
-                <!-- 已经登录时显示
-                <a href="user_center_address.html">张三</a><strong>|</strong>
-                <a href="exit.html">退出</a>
-                -->
-
-                <a href="register.html">注册</a><strong>|</strong>
-                <a href="login.html">登录</a>
-
-                <a href="cart.html">购物车</a>
+                <a id="cart_count" href="cart.html" >购物车({{ total_count }})</a>
                 <a href="">联系我们</a>
             </div>
         </div>
@@ -42,3 +43,28 @@
 </div>
 <!--/页面头部-->
 
+<script type="text/javascript" src="js/vue-2.5.16.js"></script>
+<script type="text/javascript" src="js/axios-0.18.0.min.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el: '#menu',
+        data: {
+            username: sessionStorage.username || localStorage.username,
+            total_count: 0
+        },
+        mounted: function(){
+            axios.get('http://127.0.0.1:8000/cart/count/')
+                .then(response => {
+                    this.total_count = response.data.total_count;
+                })
+        },
+        methods: {
+            // 退出
+            logout: function(){
+                sessionStorage.clear();
+                localStorage.clear();
+                location.href = 'login.html';
+            },
+        }
+    });
+</script>

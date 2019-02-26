@@ -40,15 +40,16 @@
                 <a href="login.html">账户登录</a>
             </div>
 
-            <form id="regform" name="regform">
+            <form id="regform" name="regform" @submit.prevent="on_submit">
                 <div class="form-box full">
 
                     <dl class="form-group">
                         <dt>用 户 名：</dt>
                         <dd>
                             <input id="txtUsername" name="username" type="text"
-                                   class="input" placeholder="请输入登录用户名"/>
-                            <span class="Validform_wrong" >请输入5-20个字符的用户名</span>
+                                   class="input" placeholder="请输入登录用户名"
+                                   v-model="username" @blur="check_username"/>
+                            <span class="Validform_wrong" v-show="error_name">{{ error_name_message }}</span>
                         </dd>
                     </dl>
 
@@ -56,8 +57,10 @@
                         <dt>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</dt>
                         <dd>
                             <input id="txtPassword" name="password" type="password"
-                                   class="input" placeholder="请输入登录密码"/>
-                            <span class="Validform_wrong">请输入8-20位的登录密码</span>
+                                   class="input" placeholder="请输入登录密码"
+                                   v-model="password" @blur="check_pwd"/>
+                            <span class="Validform_wrong"
+                                v-show="error_password">{{ error_password_message }}</span>
                         </dd>
                     </dl>
 
@@ -65,8 +68,9 @@
                         <dt>确认密码：</dt>
                         <dd>
                             <input id="txtPassword1" name="password2" type="password" class="input"
-                                   placeholder="请再次输入密码" />
-                            <span class="Validform_wrong">两次输入的密码不一致</span>
+                                   placeholder="请再次输入密码" v-model="password2" @blur="check_cpwd"/>
+                            <span class="Validform_wrong"
+                                v-show="error_check_password">两次输入的密码不一致</span>
                         </dd>
                     </dl>
 
@@ -75,8 +79,10 @@
                         <dt>手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机：</dt>
                         <dd>
                             <input id="txtMobile" name="mobile" type="text"
-                                   class="input" placeholder="输入手机号码"/>
-                            <span class="Validform_wrong">请输入正确的手机号</span>
+                                   class="input" placeholder="输入手机号码"
+                                v-model="mobile" @blur="check_phone"/>
+                            <span class="Validform_wrong"
+                                v-show="error_phone">{{ error_phone_message }}</span>
                         </dd>
                     </dl>
                     <!--/开放注册及手机注册-->
@@ -86,9 +92,10 @@
                         <dt>短信验证码：</dt>
                         <dd>
                             <input id="txtCode" name="sms_code" type="text" class="input code"
-                                   placeholder="请输入短信验证码"/>
-                            <a class="send" >获取验证码</a>
-                            <span class="Validform_wrong">请输入短信验证码</span>
+                                   placeholder="请输入短信验证码"
+                                   v-model="sms_code" @blur="check_sms_code"/>
+                            <a class="send" @click="get_sms_code">获取验证码</a>
+                            <span v-show="error_sms_code" class="Validform_wrong">{{ error_sms_code_message }}</span>
                         </dd>
                     </dl>
                     <!--/开放注册-->
@@ -96,7 +103,8 @@
                     <!--开启注册协议-->
                     <dl class="form-group">
                         <dd>
-                            <input id="chkAgree" name="chkAgree" type="checkbox" value="1">
+                            <input id="chkAgree" name="chkAgree" type="checkbox" value="1"
+                                v-model="allow" @change="check_allow">
                             <label for="chkAgree">我已仔细阅读并接受 <a href="javascript:;"
                                    onclick="showWindow('#regrules');">注册许可协议</a></label>
                             <div id="regrules" title="注册许可协议" style="display:none;">
@@ -104,7 +112,8 @@
                                 2、在所有在本站发表的文章，本站都具有最终编辑权，并且保留用于印刷或向第三方发表的权利，如果你的资料不齐全，我们将有权不作任何通知使用你在本站发布的作品。
                                 3、在登记过程中，您将选择注册名和密码。注册名的选择应遵守法律法规及社会公德。您必须对您的密码保密，您将对您注册名和密码下发生的所有活动承担责任。
                             </div>
-                            <span class="Validform_wrong">请勾选接受用户协议</span>
+                            <span class="Validform_wrong"
+                                v-show="error_allow">请勾选接受用户协议</span>
                         </dd>
                     </dl>
 
@@ -121,6 +130,7 @@
         </div>
     </div>
 </div>
+
 
 <!--页面底部-->
 <div id="footer"></div>

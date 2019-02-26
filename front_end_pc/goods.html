@@ -5,13 +5,11 @@
     <title>购物商城 - DTcms网站管理系统</title>
 
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
-    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-    <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
-    <script type="text/javascript" src="js/common.js"></script>
-	<script type="text/javascript" src="js/date.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/jquery.flexslider-min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/common.js"></script>
 
     <script type="text/javascript">
-        <!-- 启动轮播图 -->
         $(function () {
             $("#focus-box").flexslider({
                 directionNav: false,
@@ -148,13 +146,13 @@
                         <div id="focus-box" class="focus-box">
                             <ul class="slides">
                                 <li>
-                                    <a href="">
-                                        <img src=""/>
+                                    <a href="goods.html">
+                                        <img src="images/focus_1.png"/>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="">
-                                        <img src=""/>
+                                    <a href="goods.html">
+                                        <img src="images/focus_2.png"/>
                                     </a>
                                 </li>
                             </ul>
@@ -167,335 +165,73 @@
                 <!--推荐商品-->
                 <div class="left-220">
                     <ul class="side-img-list">
-
-                        <li>
+                        <li v-for="(goods, index) in recommend_goods">
                             <div class="img-box">
-                                <label>1</label>
-                                <img src=""/>
+                                <label>{{ index+1 }}</label>
+                                <img :src="goods.img_url"/>
                             </div>
                             <div class="txt-box">
-                                <a href="">奔腾（BNTN） 380功放+纽约至尊 套装家庭影院</a>
-                                <span>2015-04-20</span>
+                                <a :href="'goods_detail.html?id=' + goods.id">{{ goods.title }}</a>
+                                <span>{{ goods.create_time | formatDate }}</span>
                             </div>
                         </li>
-                        <li>
-                            <div class="img-box">
-                                <label>2</label>
-                                <img src=""/>
-                            </div>
-                            <div class="txt-box">
-                                <a href="">奔腾（BNTN） 380功放+纽约至尊 套装家庭影院</a>
-                                <span>2015-04-20</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="img-box">
-                                <label>3</label>
-                                <img src=""/>
-                            </div>
-                            <div class="txt-box">
-                                <a href="">奔腾（BNTN） 380功放+纽约至尊 套装家庭影院</a>
-                                <span>2015-04-20</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="img-box">
-                                <label>4</label>
-                                <img src=""/>
-                            </div>
-                            <div class="txt-box">
-                                <a href="">奔腾（BNTN） 380功放+纽约至尊 套装家庭影院</a>
-                                <span>2015-04-20</span>
-                            </div>
-                        </li>
-
-
                     </ul>
                 </div>
                 <!--/推荐商品-->
+
             </div>
         </div>
     </div>
+
     <!--分类推荐-->
     <div class="section">
-
         <!--子类-->
-        <div class="main-tit">
-            <h2>手机数码</h2>
-            <p>
-
-                <a href="">手机通讯</a>
-                <a href="">手机通讯</a>
-                <a href="">手机通讯</a>
-
-                <a href="">更多<i>+</i></a>
-            </p>
-        </div>
-        <!--/子类-->
-        <div class="wrapper clearfix">
-            <div class="wrap-box">
-                <ul class="img-list">
-
-                    <li>
-                        <a href="">
-                            <div class="img-box"><img src=""/></div>
-                            <div class="info">
-                                <h3>尼康(Nikon)D3300套机（18-55mm f/3.5-5.6G VRII）（黑色）</h3>
-                                <p class="price"><b>¥3180.00</b>元</p>
-                                <p>
-                                    <strong>库存 10</strong>
-                                    <span>市场价：<s>3150.00</s></span>
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="">
-                            <div class="img-box"><img src=""/></div>
-                            <div class="info">
-                                <h3>尼康(Nikon)D3300套机（18-55mm f/3.5-5.6G VRII）（黑色）</h3>
-                                <p class="price"><b>¥3180.00</b>元</p>
-                                <p>
-                                    <strong>库存 10</strong>
-                                    <span>市场价：<s>3150.00</s></span>
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="">
-                            <div class="img-box"><img src=""/></div>
-                            <div class="info">
-                                <h3>尼康(Nikon)D3300套机（18-55mm f/3.5-5.6G VRII）（黑色）</h3>
-                                <p class="price"><b>¥3180.00</b>元</p>
-                                <p>
-                                    <strong>库存 10</strong>
-                                    <span>市场价：<s>3150.00</s></span>
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="">
-                            <div class="img-box"><img src=""/></div>
-                            <div class="info">
-                                <h3>尼康(Nikon)D3300套机（18-55mm f/3.5-5.6G VRII）（黑色）</h3>
-                                <p class="price"><b>¥3180.00</b>元</p>
-                                <p>
-                                    <strong>库存 10</strong>
-                                    <span>市场价：<s>3150.00</s></span>
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="">
-                            <div class="img-box"><img src=""/></div>
-                            <div class="info">
-                                <h3>尼康(Nikon)D3300套机（18-55mm f/3.5-5.6G VRII）（黑色）</h3>
-                                <p class="price"><b>¥3180.00</b>元</p>
-                                <p>
-                                    <strong>库存 10</strong>
-                                    <span>市场价：<s>3150.00</s></span>
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-
-                </ul>
+        <template v-for="(category, index) in categories">
+            <div class="main-tit">
+                <h2>{{ category.title }}</h2>
+                <p>
+                    <a :href="'list.html?category=' + sub.id"
+                       v-for="(sub, index) in category.goodscategory_set">{{ sub.title }}</a>
+                    <a href="">更多<i>+</i></a>
+                </p>
             </div>
-        </div>
+            <!--/子类-->
+            <div class="wrapper clearfix">
 
-        <!--子类-->
-        <div class="main-tit">
-            <h2>电脑办公</h2>
-            <p>
+                <div class="wrap-box">
+                    <ul class="img-list">
 
-                <a href="">电脑整机</a>
-                <a href="">电脑整机</a>
-                <a href="">电脑整机</a>
+                        <li v-for="(goods, index) in category.goods">
+                            <a :href="'goods_detail.html?id=' + goods.id">
+                                <div class="img-box"><img :src="goods.img_url"/></div>
+                                <div class="info">
+                                    <h3>{{ goods.title }}</h3>
+                                    <p class="price"><b>¥{{ goods.sell_price }}</b>元</p>
+                                    <p>
+                                        <strong>库存 {{ goods.stock }}</strong>
+                                        <span>市场价：<s>{{ goods.market_price }}</s></span>
+                                    </p>
+                                </div>
+                            </a>
+                        </li>
 
-                <a href="">更多<i>+</i></a>
-            </p>
-        </div>
-        <!--/子类-->
-        <div class="wrapper clearfix">
-            <div class="wrap-box">
-                <ul class="img-list">
-
-                    <li>
-                        <a href="">
-                            <div class="img-box"><img src=""/></div>
-                            <div class="info">
-                                <h3>惠普(HP) Officejet Pro 8610商用彩色喷墨一体机</h3>
-                                <p class="price"><b>¥1999.00</b>元</p>
-                                <p>
-                                    <strong>库存 100</strong>
-                                    <span>市场价：<s>2099.00</s></span>
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="">
-                            <div class="img-box"><img src=""/></div>
-                            <div class="info">
-                                <h3>惠普(HP) Officejet Pro 8610商用彩色喷墨一体机</h3>
-                                <p class="price"><b>¥1999.00</b>元</p>
-                                <p>
-                                    <strong>库存 100</strong>
-                                    <span>市场价：<s>2099.00</s></span>
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="">
-                            <div class="img-box"><img src=""/></div>
-                            <div class="info">
-                                <h3>惠普(HP) Officejet Pro 8610商用彩色喷墨一体机</h3>
-                                <p class="price"><b>¥1999.00</b>元</p>
-                                <p>
-                                    <strong>库存 100</strong>
-                                    <span>市场价：<s>2099.00</s></span>
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="">
-                            <div class="img-box"><img src=""/></div>
-                            <div class="info">
-                                <h3>惠普(HP) Officejet Pro 8610商用彩色喷墨一体机</h3>
-                                <p class="price"><b>¥1999.00</b>元</p>
-                                <p>
-                                    <strong>库存 100</strong>
-                                    <span>市场价：<s>2099.00</s></span>
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="">
-                            <div class="img-box"><img src=""/></div>
-                            <div class="info">
-                                <h3>惠普(HP) Officejet Pro 8610商用彩色喷墨一体机</h3>
-                                <p class="price"><b>¥1999.00</b>元</p>
-                                <p>
-                                    <strong>库存 100</strong>
-                                    <span>市场价：<s>2099.00</s></span>
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-
-
-                </ul>
+                    </ul>
+                </div>
             </div>
-        </div>
-
-        <!--子类-->
-        <div class="main-tit">
-            <h2>影音娱乐</h2>
-            <p>
-                <a href="">平板电视</a>
-                <a href="">平板电视</a>
-                <a href="">平板电视</a>
-
-                <a href="">更多<i>+</i></a>
-            </p>
-        </div>
-        <!--/子类-->
-        <div class="wrapper clearfix">
-            <div class="wrap-box">
-                <ul class="img-list">
-
-                    <li>
-                        <a href="">
-                            <div class="img-box"><img src=""/></div>
-                            <div class="info">
-                                <h3>Shinco/新科 S2300 无线麦克风 无线手持话筒 双手麦 KTV 舞台</h3>
-                                <p class="price"><b>¥199.00</b>元</p>
-                                <p>
-                                    <strong>库存 20</strong>
-                                    <span>市场价：<s>269.00</s></span>
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <div class="img-box"><img src=""/></div>
-                            <div class="info">
-                                <h3>Shinco/新科 S2300 无线麦克风 无线手持话筒 双手麦 KTV 舞台</h3>
-                                <p class="price"><b>¥199.00</b>元</p>
-                                <p>
-                                    <strong>库存 20</strong>
-                                    <span>市场价：<s>269.00</s></span>
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <div class="img-box"><img src=""/></div>
-                            <div class="info">
-                                <h3>Shinco/新科 S2300 无线麦克风 无线手持话筒 双手麦 KTV 舞台</h3>
-                                <p class="price"><b>¥199.00</b>元</p>
-                                <p>
-                                    <strong>库存 20</strong>
-                                    <span>市场价：<s>269.00</s></span>
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <div class="img-box"><img src=""/></div>
-                            <div class="info">
-                                <h3>Shinco/新科 S2300 无线麦克风 无线手持话筒 双手麦 KTV 舞台</h3>
-                                <p class="price"><b>¥199.00</b>元</p>
-                                <p>
-                                    <strong>库存 20</strong>
-                                    <span>市场价：<s>269.00</s></span>
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <div class="img-box"><img src=""/></div>
-                            <div class="info">
-                                <h3>Shinco/新科 S2300 无线麦克风 无线手持话筒 双手麦 KTV 舞台</h3>
-                                <p class="price"><b>¥199.00</b>元</p>
-                                <p>
-                                    <strong>库存 20</strong>
-                                    <span>市场价：<s>269.00</s></span>
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-
+        </template>
     </div>
     <!--/分类推荐-->
+
 </div>
 
 <!--页面底部-->
 <div id="footer"></div>
 <script>$("#footer").load("_footer.html");</script>
 <!--/页面底部-->
+
+<script src="js/axios-0.18.0.min.js"></script>
+<script src="js/vue-2.5.16.js"></script>
+<script src="js/goods.js"></script>
 
 </body>
 </html>

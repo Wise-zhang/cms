@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+    <script src="https://unpkg.com/vue@2.5.9/dist/vue.js"></script>
+</head>
+
+<div id="app">
+    <p id="id1"></p>
+    <p id="id2"></p>
+
+    <div>
+        <ul>
+            <li v-for="item in messages">{{ item }}</li>
+        </ul>
+    </div>
+
+    <a href="javascript:;" >测试跳转</a>
+
+</div>
+
+
+<script type="text/javascript">
+    var message = "Hello!";
+    var app = new Vue({
+        el: "#app",
+        data: {
+            message: "你好！",
+            messages: [1, 2, 3]
+        },
+        created: function () {
+            this.showMessage1();    //this 1
+            this.showMessage2();   //this 2
+        },
+        methods: {
+            showMessage1: function () {
+                setTimeout(function () {
+                    document.getElementById("id1").innerText = this.message;  //this 3
+                }, 10)
+            },
+            showMessage2: function () {
+                setTimeout(() => {
+                    document.getElementById("id2").innerText = this.message;  //this 4
+                }, 10)
+            }
+        }
+    });
+</script>
+</html>

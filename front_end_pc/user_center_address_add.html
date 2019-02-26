@@ -36,107 +36,128 @@
     </div>
 </div>
 <!--/当前位置-->
+<div id="app">
+    <div class="section clearfix">
+        <!--页面左边-->
+        <div class="left-260">
+            <div class="bg-wrap">
+                <div class="avatar-box">
+                    <a class="img-box" href="">
+                        <i class="iconfont icon-user-full"></i>
+                    </a>
+                    <h3>
+                        django
+                    </h3>
+                    <p><b>注册会员</b></p>
+                </div>
 
-<div class="section clearfix">
-    <!--页面左边-->
-    <div class="left-260">
-        <div class="bg-wrap">
-            <div class="avatar-box">
-                <a class="img-box" href="">
-                    <i class="iconfont icon-user-full"></i>
-                </a>
-                <h3>
-                    django
-                </h3>
-                <p><b>注册会员</b></p>
-            </div>
-
-            <div class="center-nav">
-                <ul>
-                    <li>
-                        <h2>
-                            <i class="iconfont icon-user"></i>
-                            <span>地址管理</span>
-                        </h2>
-                        <div class="list">
-                            <p><a href="user_center_address.html"><i class="iconfont icon-arrow-right"></i>地址列表</a></p>
-                            </p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-    </div>
-    <!--/页面左边-->
-
-    <!--页面右边-->
-    <div class="right-auto">
-        <div class="bg-wrap" style="min-height:765px;">
-            <div class="sub-tit">
-                <a class="add" href="javascript:history.go(-1);">
-                    <i class="iconfont icon-reply"></i>返回</a>
-                <span>新增地址</span>
-            </div>
-
-            <div class="form-box address-info">
-                <dl class="form-group">
-                    <dt>*收货人姓名：</dt>
-                    <dd>
-                        <input name="book_id" id="book_id" type="hidden" value="0"/>
-                        <input name="accept_name" id="accept_name" type="text" class="input" value="" datatype="s2-20"
-                               sucmsg=" "/>
-                    </dd>
-                </dl>
-                <dl class="form-group">
-                    <dt>*所属地区：</dt>
-                    <dd>
-                        <select id="province" name="province" class="select" style="width: 100px"></select>
-                        <select id="city" name="city" class="select" style="width: 100px"></select>
-                        <select id="area" name="area" class="select" datatype="*" style="width: 100px"></select>
-                    </dd>
-                </dl>
-                <dl class="form-group">
-                    <dt>*详细地址：</dt>
-                    <dd>
-                        <input name="address" id="address" type="text" class="input" value="" />
-                    </dd>
-                </dl>
-                <dl class="form-group">
-                    <dt>*手机号码：</dt>
-                    <dd>
-                        <input name="mobile" id="mobile" type="text" class="input" value="" />
-                    </dd>
-                </dl>
-                <dl class="form-group">
-                    <dt>固定电话：</dt>
-                    <dd>
-                        <input name="telphone" id="telphone" type="text" class="input" value=""/>
-                    </dd>
-                </dl>
-                <dl class="form-group">
-                    <dt>电子邮箱：</dt>
-                    <dd>
-                        <input name="email" id="email" type="text" class="input" value=""/>
-                    </dd>
-                </dl>
-
-                <div class="page-foot" style="margin-left: 50px; margin-top: 20px;">
-                    <div class="btn-box">
-                        <a href="">保存地址</a>
-                    </div>
+                <div class="center-nav">
+                    <ul>
+                        <li>
+                            <h2>
+                                <i class="iconfont icon-user"></i>
+                                <span>地址管理</span>
+                            </h2>
+                            <div class="list">
+                                <p><a href="user_center_address.html"><i class="iconfont icon-arrow-right"></i>地址列表</a>
+                                </p>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
 
             </div>
         </div>
+        <!--/页面左边-->
+
+        <!--页面右边-->
+        <div class="right-auto">
+            <div class="bg-wrap" style="min-height:765px;">
+                <div class="sub-tit">
+                    <a class="add" href="user_center_address.html">
+                        <i class="iconfont icon-reply"></i>返回</a>
+                    <span>新增地址</span>
+                </div>
+
+                <div class="form-box address-info">
+                    <dl class="form-group">
+                        <dt>*收货人姓名：</dt>
+                        <dd>
+                            <input name="book_id" id="book_id" type="hidden" value="0"/>
+                            <input name="accept_name" id="accept_name" type="text" class="input" value=""
+                                   datatype="s2-20" sucmsg=" " v-model="form_address.receiver"/>
+                        </dd>
+                    </dl>
+                    <dl class="form-group">
+                        <dt>*所属地区：</dt>
+                        <dd>
+
+                            <select v-model="form_address.province_id" class="select">
+                                <option v-for="province in provinces"
+                                        :value="province.id">{{ province.name }}</option>
+                            </select>
+                            <select v-model="form_address.city_id" class="select">
+                                <option v-for="city in cities"
+                                        :value="city.id">{{ city.name }}</option>
+                            </select>
+                            <select v-model="form_address.district_id" class="select">
+                                <option v-for="district in districts"
+                                        :value="district.id">{{ district.name }}</option>
+                            </select>
+
+                        </dd>
+                    </dl>
+                    <dl class="form-group">
+                        <dt>*详细地址：</dt>
+                        <dd>
+                            <input name="address" id="address" type="text" class="input"
+                                   v-model="form_address.place"/>
+                        </dd>
+                    </dl>
+                    <dl class="form-group">
+                        <dt>*手机号码：</dt>
+                        <dd>
+                            <input name="mobile" id="mobile" type="text" class="input" value=""
+                                   v-model="form_address.mobile"/>
+                        </dd>
+                    </dl>
+                    <dl class="form-group">
+                        <dt>固定电话：</dt>
+                        <dd>
+                            <input name="telphone" id="telphone" type="text" class="input" value=""
+                                v-model="form_address.tel"/>
+                        </dd>
+                    </dl>
+                    <dl class="form-group">
+                        <dt>电子邮箱：</dt>
+                        <dd>
+                            <input name="email" id="email" type="text" class="input" value=""
+                            v-model="form_address.email"/>
+                        </dd>
+                    </dl>
+
+                    <div class="page-foot" style="margin-left: 50px; margin-top: 20px;">
+                        <div class="btn-box">
+                            <a @click="save_address">保存地址</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--/页面右边-->
     </div>
-    <!--/页面右边-->
 </div>
 
 <!--页面底部-->
 <div id="footer"></div>
 <script>$("#footer").load("_footer.html");</script>
 <!--/页面底部-->
+
+<script src="js/axios-0.18.0.min.js"></script>
+<script src="js/vue-2.5.16.js"></script>
+<script src="js/user_center_address_add.js"></script>
 
 </body>
 </html>
