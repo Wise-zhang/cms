@@ -2,11 +2,13 @@ import random
 import re
 
 from django_redis import get_redis_connection
+from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from celery_tasks.sms.tasks import send_sms_code
 from users.models import User
+from users.serializers import CreateUserSerializer
 
 
 class SendMobileCodeView(APIView):
@@ -44,3 +46,8 @@ class SendMobileCodeView(APIView):
         send_sms_code.delay(mobile, sms_code)
 
         return Response(data={"messages": "短信验证码发送成功"})
+
+
+class RegisterView(CreateAPIView):
+    """注册用户"""
+    serializer_class = CreateUserSerializer
