@@ -1,5 +1,5 @@
 var vm = new Vue({
-    el: '#apps',
+    el: '#app',
     data: {
         host: 'http://127.0.0.1:8000',
         goods: null,
@@ -25,13 +25,25 @@ var vm = new Vue({
         // 获取商品详情数据
         get_goods_detail: function(id) {
 			//发送请求
-            
+            axios.get('http://127.0.0.1:8000/goods/' + id + '/detail/')
+                .then(response => {
+                    this.goods = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error.response)
+                })
         },
 
         // 获取推荐商品
         get_recommend_goods: function () {
 			//发送请求
-            
+            axios.get('http://127.0.0.1:8000/goods/detail/recommendation')
+                .then(response => {
+                    this.recommend_goods = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error.response)
+                })
         },
 
         addToCart: function() {
