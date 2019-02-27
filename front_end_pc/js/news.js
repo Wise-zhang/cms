@@ -17,7 +17,7 @@ var vm = new Vue({
         // 初始化显示顶部的新闻数据
         init_top_news: function () {
             axios.get("http://127.0.0.1:8000/news/top/")
-                .then(response=>{
+                .then(response => {
                     this.slide_news = response.data.slide_news;
                     this.top_news = response.data.top_news;
                     this.image_news = response.data.image_news;
@@ -25,7 +25,7 @@ var vm = new Vue({
                     console.log(this.top_news);
                     console.log(this.image_news);
                 })
-                .catch(error=>{
+                .catch(error => {
                     console.log(error.response)
                 })
         },

@@ -4,14 +4,12 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-
 from news import serializers
 from news.models import News
 
 
 class NewsTopView(APIView):
     def get(self, request):
-
         # slide_news: [],
         # top_news: [],
         # image_news: [],
