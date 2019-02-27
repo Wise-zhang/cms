@@ -26,14 +26,6 @@ var vm = new Vue({
                 query_string = '?ordering=' + this.ordering;
             }
 			//发送请求
-            axios.get('http://127.0.0.1:8000/goods/list/'+query_string)
-                .then(response => {
-                    this.goods_list = response.data;
-                    console.log(this.goods_list)
-                })
-                .catch(function (error) {
-                    console.log(error.response)
-                })
         },
 
         // 获取当前显示的类别
