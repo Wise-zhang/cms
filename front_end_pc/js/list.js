@@ -29,7 +29,6 @@ var vm = new Vue({
             axios.get('http://127.0.0.1:8000/goods/list/'+query_string)
                 .then(response => {
                     this.goods_list = response.data;
-                    console.log(this.goods_list)
                 })
                 .catch(function (error) {
                     console.log(error.response)
