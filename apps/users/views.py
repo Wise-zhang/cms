@@ -6,6 +6,7 @@ from redis import StrictRedis
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_jwt.settings import api_settings
 
 from celery_tasks.sms.tasks import send_sms_code
 from users.models import User
@@ -64,3 +65,36 @@ class SendMobileCodeView(APIView):
 class RegisterView(CreateAPIView):
     """注册用户"""
     serializer_class = CreateUserSerializer
+
+
+class LoginView(APIView):
+    """登录视图"""
+
+    def post(self, request):
+        """
+        1. 获取前端传的用户密码
+        2. 通过用户名查询出用户名是否存在
+            1. 不存在返回错误提示：用户名未注册
+        3. 校验密码是否正确
+        """
+        username = request.data.get("username")
+        password = request.data.get("password")
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return Response(data={"messages": "用户名未注册"})
+        if password != user.password:
+            return Response(data={"messages": "账号或密码错误"})
+
+        # 生成JWT的token
+        jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+        jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
+        payload = jwt_payload_handler(user)
+        token = jwt_encode_handler(payload)
+
+        data = {
+            "id": user.id,
+            "username": username,
+            "token": token
+        }
+        return Response(data=data)
