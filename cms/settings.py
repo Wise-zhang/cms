@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_redis',
     'corsheaders',
+    'django_filters',
     # 自建的模块
     'users',
     'news',
