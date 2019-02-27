@@ -1,5 +1,5 @@
-from django_filters import OrderingFilter
-from rest_framework.generics import RetrieveAPIView, ListAPIView
+from rest_framework.filters import OrderingFilter
+from rest_framework.generics import RetrieveAPIView, ListAPIView, GenericAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -55,7 +55,7 @@ class GoodsIndexSubView(APIView):
         return Response(data_list)
 
 
-class GoodsListView(APIView):
+class GoodsListView(ListAPIView):
     """
     查询分类商品的列表
     """
@@ -75,8 +75,12 @@ class GoodsListView(APIView):
     #
     #     else:
     #         return Goods.objects.filter(category_id=category).all()
-    def get(self, request):
-        category = request.query_params['category']
+    filter_backends = [OrderingFilter]
+    ordering_fields = ('sales', 'stock', 'sell_price')
+    serializer_class = GoodListSerializer
+
+    def get_queryset(self):
+        category = self.request.query_params['category']
         cate = GoodsCategory.objects.get(id=category)
         if cate.parent_id == 0:
             sub_list = cate.goodscategory_set.all()
@@ -88,10 +92,9 @@ class GoodsListView(APIView):
 
         else:
             good_query = Goods.objects.filter(category_id=category, status=0).all()
-        return Response(GoodListSerializer(instance=good_query, many=True).data)
+        return good_query
 
-    filter_backends = [OrderingFilter]
-    ordering_fields = ('sales', 'stock', 'sell_price')
+
 
 
 class GoodsDetailView(RetrieveAPIView):
