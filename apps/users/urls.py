@@ -20,6 +20,7 @@ from users import views
 
 urlpatterns = [
     url(r"^mobile_code/$", views.SendMobileCodeView.as_view()),  # 发送短信验证码
+    url(r"^user_name/$", views.ValidateNameView.as_view()),  # 验证用户名
     url(r'^register/$', views.RegisterView.as_view()),  # 注册
 ]
 

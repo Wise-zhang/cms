@@ -2,6 +2,7 @@ import random
 import re
 
 from django_redis import get_redis_connection
+from redis import StrictRedis
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -9,6 +10,17 @@ from rest_framework.views import APIView
 from celery_tasks.sms.tasks import send_sms_code
 from users.models import User
 from users.serializers import CreateUserSerializer
+
+
+class ValidateNameView(APIView):
+    """校验用户名"""
+
+    def post(self, request):
+        username = request.data.get("username")
+        user = User.objects.filter(username=username).all()
+        if user:
+            return Response(data={"messages": "该用户名已经存在了"})
+        return Response(data={"messages": "OK"})
 
 
 class SendMobileCodeView(APIView):
@@ -44,6 +56,7 @@ class SendMobileCodeView(APIView):
         redis_conn.set("%s_flag" % mobile, 1, ex=60)  # 一分钟后自动清除
         # 7.执行异步任务发送验证码
         send_sms_code.delay(mobile, sms_code)
+        print(sms_code)
 
         return Response(data={"messages": "短信验证码发送成功"})
 
