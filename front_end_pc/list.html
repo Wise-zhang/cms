@@ -38,12 +38,10 @@
 
             <!--/分类-->
             <div class="sort-box">
-                <a class="selected" href="">上架时间</a>
-                <a href="">按人气</a>
-
-                <a href="">价格从高到低</a>
-
-                <a href="">价格从低到高</a>
+                <a @click="on_sort('create_time')" :class="ordering=='create_time'?'selected':''" >上架时间</a>
+                <a @click="on_sort('sales')" :class="ordering=='sales'?'selected':''" >按人气</a>
+                <a @click="on_sort('sell_price')" :class="ordering=='sell_price'?'selected':''" >价格从低到高</a>
+                <a @click="on_sort('-sell_price')" :class="ordering=='-sell_price'?'selected':''" >价格从高到低</a>
             </div>
         </div>
     </div>
@@ -53,81 +51,17 @@
     <div class="section">
         <div class="wrapper clearfix">
             <ul class="img-list">
-                <li>
-                    <a href="">
+                <li v-for="good in goods_list">
+                    <a :href="'goods_detail.html?id=' + good.id">
                         <div class="img-box">
-                            <img src=""/>
+                            <img :src="good.img_url"/>
                         </div>
                         <div class="info">
-                            <h3>Shinco/新科 S2300 无线麦克风 无线手持话筒 双手麦 KTV 舞台</h3>
-                            <p class="price"><b>¥199.00</b>元</p>
+                            <h3>{{ good.title }}</h3>
+                            <p class="price"><b>¥{{ good.sell_price }}</b>元</p>
                             <p>
-                                <strong>库存 20</strong>
-                                <span>市场价：<s>269.00</s></span>
-                            </p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <div class="img-box">
-
-                            <img src=""/>
-                        </div>
-                        <div class="info">
-                            <h3>Shinco/新科 S2300 无线麦克风 无线手持话筒 双手麦 KTV 舞台</h3>
-                            <p class="price"><b>¥199.00</b>元</p>
-                            <p>
-                                <strong>库存 20</strong>
-                                <span>市场价：<s>269.00</s></span>
-                            </p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <div class="img-box">
-
-                            <img src=""/>
-                        </div>
-                        <div class="info">
-                            <h3>Shinco/新科 S2300 无线麦克风 无线手持话筒 双手麦 KTV 舞台</h3>
-                            <p class="price"><b>¥199.00</b>元</p>
-                            <p>
-                                <strong>库存 20</strong>
-                                <span>市场价：<s>269.00</s></span>
-                            </p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <div class="img-box">
-
-                            <img src=""/>
-                        </div>
-                        <div class="info">
-                            <h3>Shinco/新科 S2300 无线麦克风 无线手持话筒 双手麦 KTV 舞台</h3>
-                            <p class="price"><b>¥199.00</b>元</p>
-                            <p>
-                                <strong>库存 20</strong>
-                                <span>市场价：<s>269.00</s></span>
-                            </p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <div class="img-box">
-
-                            <img src=""/>
-                        </div>
-                        <div class="info">
-                            <h3>Shinco/新科 S2300 无线麦克风 无线手持话筒 双手麦 KTV 舞台</h3>
-                            <p class="price"><b>¥199.00</b>元</p>
-                            <p>
-                                <strong>库存 20</strong>
-                                <span>市场价：<s>269.00</s></span>
+                                <strong>库存 {{ good.stock }}</strong>
+                                <span>市场价：<s>{{ good.market_price }}</s></span>
                             </p>
                         </div>
                     </a>
@@ -148,6 +82,10 @@
 <div id="footer"></div>
 <script>$("#footer").load("_footer.html");</script>
 <!--/页面底部-->
+
+<script type="text/javascript" src="js/vue-2.5.16.js"></script>
+<script type="text/javascript" src="js/axios-0.18.0.min.js"></script>
+<script src="js/list.js"></script>
 
 </body>
 </html>

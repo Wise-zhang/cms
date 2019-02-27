@@ -49,10 +49,28 @@ var vm = new Vue({
         addToCart: function() {
             // 添加商品到购物车
             if (this.is_login()) {  // 已经登录
-                //发送登录请求
-				
-			
-               
+                //发送登录请求   这里末尾必须加/，post请求不会补全url
+                axios.post('http://127.0.0.1:8000/carts/',{
+                    sku_id: parseInt(this.goods_id),
+                    count: this.count,
+                },{
+                    headers: {
+                        'Authorization': 'JWT ' + this.token
+                    },
+                    responseType: 'json',
+                    withCredentials: true
+                })
+                    .then(response =>{
+                    alert('添加购物车成功');
+                   // this.cart_total_count += response.data.count;
+                        })
+                    .catch(function(error){
+                        console.log(error.response)
+                    })
+
+
+
+
             } else {
                 // 如果没有登录,跳转到登录界面,引导用户登录
                 window.location.href = 'login.html'
