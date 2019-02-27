@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^', include('carts.urls')),
     url(r'^goods/', include('goods.urls')),
     url(r'^news/', include('news.urls')),
+    url(r'^users/', include('users.urls')),  # 用户
 ]
