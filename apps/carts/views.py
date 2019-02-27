@@ -90,5 +90,3 @@ class CartView(APIView):
         #     # 参数3： cookie有效期
         #     response.set_cookie('cart', cookie_cart, 30*24*3600)
         #     return response
-
-
