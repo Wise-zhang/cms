@@ -19,5 +19,4 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('carts.urls')),
-    url(r'^goods/', include('goods.urls')),
 ]

@@ -9,6 +9,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from carts.serializers import CartSerializer
+from goods.models import Goods
 
 
 class CartView(APIView):
