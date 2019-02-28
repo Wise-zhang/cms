@@ -150,15 +150,13 @@ CACHES = {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     },
-<<<<<<< HEAD
     "cart": {        # 保存购物车商品
         "BACKEND": "django_redis.cache.RedisCache",
         "LOCATION": "redis://127.0.0.1:6379/3",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
-    }
-=======
+    },
     "verify_codes": {
         "BACKEND": "django_redis.cache.RedisCache",
         "LOCATION": "redis://127.0.0.1:6379/2",
@@ -166,7 +164,6 @@ CACHES = {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     },
->>>>>>> f03273b77e0cf0f5e161b6e2cf1409060d5d6ed8
 }
 # 保存 session数据到 Redis中，主要给django的admin后台使用
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
