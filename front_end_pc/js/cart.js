@@ -61,7 +61,22 @@
 
         // 获取购物车商品数据
         get_cart_goods: function () {
-           //发送请求
+            axios.get('127.0.0.1:8000/carts/', {
+                headers: {
+                    'Authorization': 'JWT ' + this.token
+                },
+                responseType: 'json',
+                withCredentials: true
+            })
+                .then(response =>{
+                    this.goods_list = response.data;
+                    //for(var i=0; i<this.cart.length; i++){
+                    //this.cart[i].amount = (parseFloat(this.cart[i].price) * this.cart[i].count).toFixed(2);
+                //}
+                })
+                .catch(error =>{
+                    console.log(error.response.data);
+                })
         },
 
         // 点击增加购买数量

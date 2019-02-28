@@ -8,7 +8,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from carts.serializers import CartSerializer
+from carts.serializers import CartSerializer, CartGoodsSerializer
 from goods.models import Goods
 
 
@@ -43,7 +43,7 @@ class CartView(APIView):
 
         sku_id = serializer.validated_data['sku_id']
         count = serializer.validated_data['count']
-        select = serializer.validated_data['select']
+        selected = serializer.validated_data['selected']
 
         # 保存用户的购物车选择
         user = request.user  # 用户都可以从request里获取
@@ -53,7 +53,7 @@ class CartView(APIView):
             pl = redis_conn.pipeline()  # 管道操作提高性能
             # 增加购物车商品数量
             pl.hincrby('cart_%s' % user.id, sku_id, count)
-            if select:  # 保存商品勾选状态
+            if selected:  # 保存商品勾选状态
                 pl.sadd('cart_selected_%s' % user.id, sku_id)
             pl.execute()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -80,7 +80,7 @@ class CartView(APIView):
         #         count += int(sku.get('count'))
         #     cart[sku_id] = {
         #         'count': count,
-        #         'select': select
+        #         'selected': selected
         #     }
         #
         #     # 4. 字典 --> base64字符串
@@ -91,3 +91,35 @@ class CartView(APIView):
         #     # 参数3： cookie有效期
         #     response.set_cookie('cart', cookie_cart, 30*24*3600)
         #     return response
+
+    def get(self, request):
+        """获取用户购物车所有的商品"""
+        user = request.user
+        if user.is_authenticated:
+            redis_conn = get_redis_connection('cart')
+            dict_cart = redis_conn.hgetall('cart_%s' % user.id)  # cart_1 = {1: 2， 2：2}
+            list_cart_selected = redis_conn.smembers('cart_selected_%s' % user.id)  # cart_selected_1 = {1}   这里应该是元组
+
+            # 拼装字典 cart_1 = {1: 2， 2：2}   cart_selected_1 = {1}
+            # {1:{'count':2, 'selected':False}, 2:{'count':2, 'selected':False}}
+            cart = {}
+            # 把redis中所有的hush和set中的全部数据查出来便利组装到一个字典中
+
+            # sku_id:{'count':count,'selected':False}
+            for sku_id, count in dict_cart.items():
+                cart[int(sku_id)] = {
+                    'count': int(count),
+                    'selected': sku_id in list_cart_selected  # 相当于布尔值 不是对就是错
+                }
+            # 查询数据库数据返回序列化后的数据
+            # 查询购物车中所有的商品  cart.keys() cart中所有的键
+            skus = Goods.objects.filter(id__in=cart.keys())  # 得到的是查询集
+            for sku in skus:  # 数据库查询到的是没有count和selected这两个字段的，手动添加
+                # 给sku对象新增两个字段: 商品数量和勾选状态
+                sku.count = cart[sku.id]['count']
+                sku.selected = cart[sku.id]['selected']
+
+            # 序列化操作
+            serializer = CartGoodsSerializer(skus, many=True)
+            print(serializer.data)
+            return Response(serializer.data)
