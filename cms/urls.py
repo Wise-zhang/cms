@@ -19,4 +19,10 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('carts.urls')),
+<<<<<<< HEAD
+=======
+    url(r'^goods/', include('goods.urls')),
+    url(r'^news/', include('news.urls')),
+    url(r'^users/', include('users.urls')),  # 用户
+>>>>>>> f03273b77e0cf0f5e161b6e2cf1409060d5d6ed8
 ]

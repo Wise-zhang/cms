@@ -14,6 +14,8 @@ import os
 import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import datetime
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
@@ -148,6 +150,7 @@ CACHES = {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     },
+<<<<<<< HEAD
     "cart": {        # 保存购物车商品
         "BACKEND": "django_redis.cache.RedisCache",
         "LOCATION": "redis://127.0.0.1:6379/3",
@@ -155,6 +158,15 @@ CACHES = {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     }
+=======
+    "verify_codes": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/2",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    },
+>>>>>>> f03273b77e0cf0f5e161b6e2cf1409060d5d6ed8
 }
 # 保存 session数据到 Redis中，主要给django的admin后台使用
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
@@ -167,3 +179,15 @@ CORS_ORIGIN_WHITELIST = (
 )
 # 指定在跨域访问中，后台是否支持cookie操作
 CORS_ALLOW_CREDENTIALS = True
+
+# 设置通过JWT进行验证
+REST_FRAMEWORK = {'DEFAULT_AUTHENTICATION_CLASSES': (
+    'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    'rest_framework.authentication.SessionAuthentication',
+    'rest_framework.authentication.BasicAuthentication',
+),
+}
+
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+}
