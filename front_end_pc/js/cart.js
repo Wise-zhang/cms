@@ -114,7 +114,7 @@
             }
         },
 
-        // 更新购物车商品购买数量
+        // 手动输入修改购物车商品购买数量
         on_input: function(index) {
             // 输入的数量不能超过最大库存
             let goods = this.goods_list[index];
@@ -124,6 +124,23 @@
         // 更新购物车商品数量
         update_cart_count: function(goods_id, count, index) {
             //发送请求
+            axios.put('127.0.0.1/:8000/carts', {
+                    sku_id: goods_id,
+                    count,
+                    select: this.goods_list[index].select
+                }, {
+                    headers: {
+                        'Authorization': 'JWT ' + this.token
+                    },
+                    responseType: 'json',
+                    withCredentials: true
+                })
+                .then(response =>{
+                    this.goods_list[index].count = response.data.count;
+                })
+                .catch(error =>{
+                    console.log(error.response.data);
+                })
         },
 
         // 删除购物车中的一个商品
@@ -141,10 +158,33 @@
                 withCredentials: true
             })
                 .then(response =>{
-                    alert('删除购物车成功')
+                    //alert('删除购物车成功');
+                    // 删除数组中的下标为index的元素
+                    this.goods.splice(index, 1);
                 })
                 .catch(error =>{
                     console.log(error.response)
+                })
+        },
+
+        //更新购物车的勾选状态
+        update_select: function(index){
+            axios.put(this.host+'/cart/', {
+                    sku_id: this.goods_list[index].id,
+                    count: this.goods_list[index].count,
+                    select: this.goods_list[index].select
+                }, {
+                    headers: {
+                        'Authorization': 'JWT ' + this.token
+                    },
+                    responseType: 'json',
+                    withCredentials: true
+                })
+                .then(response => {
+                    this.goods_list[index].select = response.data.select;
+                })
+                .catch(error =>{
+                    console.log(error.response.data)
                 })
         },
 

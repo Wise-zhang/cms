@@ -89,8 +89,7 @@
                         <!-- 第1条数据 -->
                         <tr v-for="(goods, index) in goods_list" v-cloak>
                             <td align="center">
-                                <input type="checkbox" name="checkall" class="checkall"
-                                       v-model="goods.selected"/>
+                                <input type="checkbox" name="checkall" class="checkall" @change="update_select(index)" v-model="goods.select"/>
                             </td>
                             <td width="68">
                                 <a target="_blank" href="/goods/show-98.html">

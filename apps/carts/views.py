@@ -141,6 +141,30 @@ class CartView(APIView):
             pl.execute()
             return Response(status=status.HTTP_204_NO_CONTENT)
 
+    def put(self, request):
+        """修改购物车数据"""
+        # 校验参数
+        serializer = CartSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        # 获取校验后的残暑
+        sku_id = serializer.validated_data.get('sku_id')
+        count = serializer.validated_data.get('count')
+        select = serializer.validated_data.get('select')
+
+        user = request.user
+        if user.is_authenticated:
+            redis_conn = get_redis_connection('cart')
+            pl = redis_conn.pipeline()
+            # 修改商品数量
+            pl.hset('cart_%s' % user.id, sku_id, count)
+            # 修改商品的勾选状态
+            if select:
+                pl.sadd('cart_select_%s' % user.id, sku_id)
+            else:
+                pl.srem('cart_select_%s' % user.id, sku_id)
+            pl.execute()
+            return Response(serializer.data)
+
 
 class CartSelectView(APIView):
     """购物车全选"""
