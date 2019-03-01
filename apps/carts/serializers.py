@@ -27,3 +27,16 @@ class CartGoodsSerializer(serializers.ModelSerializer):
     class Meta:   # 元类
         model = Goods
         fields = ('id', 'count', 'title', 'img_url', 'sell_price', 'selected')
+
+
+class CartDeleteSerializer(serializers.Serializer):
+    """删除商品序列化器"""
+    sku_id = serializers.IntegerField(label='商品id', min_value=1)
+
+    def validated_sku_id(self, value):
+        try:
+            sku = Goods.objects.get(id=value)
+
+        except Goods.DoesNotExist:
+            raise serializers.ValidationError('商品不存在')
+        return value

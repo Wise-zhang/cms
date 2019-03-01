@@ -112,6 +112,23 @@
         // 删除购物车中的一个商品
         delete_goods: function(index){
             //发送请求
+            axios.delete('127.0.0.1:8000/carts/',{
+                data:{
+                    // delete 方法通过config的data传递参数
+                    sku_id: this.goods[index].id
+                },
+                headers:{
+                    'Authorization': 'JWT ' + this.token
+                },
+                responseType: 'json',
+                withCredentials: true
+            })
+                .then(response =>{
+                    alert('删除购物车成功')
+                })
+                .catch(error =>{
+                    console.log(error.response)
+                })
         },
 
         // 清空购物车

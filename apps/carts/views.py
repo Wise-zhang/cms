@@ -8,7 +8,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from carts.serializers import CartSerializer, CartGoodsSerializer
+from carts.serializers import CartSerializer, CartGoodsSerializer, CartDeleteSerializer
 from goods.models import Goods
 
 
@@ -123,3 +123,22 @@ class CartView(APIView):
             serializer = CartGoodsSerializer(skus, many=True)
             print(serializer.data)
             return Response(serializer.data)
+
+    def delete(self, request):
+
+        serializer = CartDeleteSerializer(request.data)
+        serializer.is_valid(raise_exception=True)
+        # 获取sku_id
+        sku_id = serializer.validated_data.get('sku_id')
+        user = request.user
+        if user.is_authenticated:
+            # 获取用户要删除的商品id
+            # 用户已登录，在redis中保存
+            redis_conn = get_redis_connection('cart')
+            pl = redis_conn.pipeline()
+            pl.hdel('cart_%s' % user.id, sku_id)
+            pl.srem('cart_selected_%s' % user.id, sku_id)
+            pl.execute()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
+
