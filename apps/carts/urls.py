@@ -20,5 +20,7 @@ from carts import views
 
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
-    url(r'^carts/$', views.CartView.as_view())
+    url(r'^carts/$', views.CartView.as_view()),
+    # 购物车全选
+    url(r'^carts/select/$', views.CartSelectView.as_view())
 ]

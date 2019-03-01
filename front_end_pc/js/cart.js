@@ -11,7 +11,7 @@
             for (let i = 0; i < this.goods_list.length; i++) {
                 let goods = this.goods_list[i];
                 // 重新计算小计金额, 自动刷新界面显示
-                if (!goods.selected) {
+                if (!goods.select) {
                     return false;
                 }
             }
@@ -25,7 +25,7 @@
                 let goods = this.goods_list[i];
                 // 重新计算小计金额, 自动刷新界面显示
                 goods.amount = parseFloat(goods.sell_price) * parseInt(goods.count);
-                if (goods.selected) {
+                if (goods.select) {
                     total_count += parseInt(goods.count);
                 }
             }
@@ -37,7 +37,7 @@
             let total_amount = 0;
             for (let i = 0; i < this.goods_list.length; i++) {
                 let goods = this.goods_list[i];
-                if (goods.selected) {
+                if (goods.select) {
                     total_amount += parseFloat(goods.sell_price) * parseInt(goods.count);
                 }
             }
@@ -54,9 +54,26 @@
         // 全选和全不选
         on_select_all: function() {
             let select = !this.select_all;
-            for (let i = 0; i < this.goods_list.length; i++) {
-                this.goods_list[i].selected = select;
-            }
+            //for (let i = 0; i < this.goods_list.length; i++) {
+            //    this.goods_list[i].select = select;
+            //}
+            axios.put('127.0.0.1:8000/cart/select', {
+                select:select
+            },{
+                responseType: 'json',
+                headers:{
+                    'Authorization': 'JWT ' + this.token
+                },
+                withCredentials: true
+            })
+                .then(response =>{
+                    for (var i=0; i<this.goods_list.length;i++) {
+                        this.goods_list[i].select = select;
+                    }
+                })
+                .catch(error =>{
+                    console.log(error.response);
+                })
         },
 
         // 获取购物车商品数据

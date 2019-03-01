@@ -40,3 +40,7 @@ class CartDeleteSerializer(serializers.Serializer):
         except Goods.DoesNotExist:
             raise serializers.ValidationError('商品不存在')
         return value
+
+
+class CartSelectSerializer(serializers.Serializer):
+    select = serializers.BooleanField(label="全选")
