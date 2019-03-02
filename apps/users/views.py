@@ -85,9 +85,9 @@ class LoginView(APIView):
         try:
             user = User.objects.get(username=username)
         except User.DoesNotExist:
-            return Response(data={"messages": "用户名未注册"})
+            return Response(data={"status": 400, "messages": "用户名未注册"}, status=200)
         if password != user.password:
-            return Response(data={"messages": "账号或密码错误"})
+            return Response(data={"status": 400, "messages": "账号或密码错误"}, status=200)
 
         # 生成JWT的token
         jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
@@ -96,6 +96,7 @@ class LoginView(APIView):
         token = jwt_encode_handler(payload)
 
         data = {
+            "status": 200,
             "id": user.id,
             "username": username,
             "token": token

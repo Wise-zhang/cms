@@ -1,5 +1,5 @@
 var vm = new Vue({
-    el: '#apps',
+    el: '#app',
     data: {
         // 双向绑定变量
         username: '',
@@ -91,6 +91,13 @@ var vm = new Vue({
 
             if (!this.error_phone) {
 				//发送获取请求
+                axios.post("http://127.0.0.1:8000/users/mobile_code/", {
+                    mobile: vm.mobile
+                })
+                    .then(function (response) {
+                        console.log(response.data.messages);
+                        alert(response.data.messages)
+                    })
 				
             }
         },
