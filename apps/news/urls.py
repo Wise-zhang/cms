@@ -19,5 +19,6 @@ from django.contrib import admin
 from news import views
 
 urlpatterns = [
-    url(r'^top/$', views.NewsTopView.as_view()),
+    url(r'^top/$', views.NewsTopView.as_view()),  # top新闻
+    url(r'^cate/$', views.NewsCateView.as_view()),  # cate新闻
 ]

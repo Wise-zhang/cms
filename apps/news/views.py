@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from news import serializers
-from news.models import News
+from news.models import News, NewsCategory
 
 
 class NewsTopView(APIView):
@@ -31,3 +31,27 @@ class NewsTopView(APIView):
             "image_news": image_news,
         }
         return Response(data)
+
+
+class NewsCateView(APIView):
+    def get(self, request):
+        # 一级类别
+        cate_queryset = NewsCategory.objects.filter(parent_id=0).all()
+        # 用于存放返回数据
+        data_list = []
+        for cate in cate_queryset:
+            # 序列化一级分类新闻
+            cate_dict = serializers.NewsCateSerializer(cate).data
+            # 获取二级分类
+            son_cate_list = cate.newscategory_set.all()
+            # 存放二级新闻id
+            son_id_list = []
+            for son_cate in son_cate_list:
+                son_id_list.append(son_cate.id)
+            cate_dict['news'] = serializers.NewsTopSerializer(
+                News.objects.filter(category_id__in=son_id_list).exclude(img_url='').order_by('-create_time')[0:4],
+                many=True).data
+            cate_dict['top8'] = serializers.NewsTopSerializer(
+                News.objects.filter(category_id__in=son_id_list).order_by('-click')[0:8], many=True).data
+            data_list.append(cate_dict)
+        return Response(data_list)

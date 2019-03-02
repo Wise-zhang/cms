@@ -3,13 +3,16 @@ import re
 
 from django_redis import get_redis_connection
 from redis import StrictRedis
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView, ListCreateAPIView, RetrieveDestroyAPIView, UpdateAPIView
+
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_jwt.settings import api_settings
 
 from celery_tasks.sms.tasks import send_sms_code
-from users.models import User
+from users import serializers
+
+from users.models import User, Address
 from users.serializers import CreateUserSerializer
 
 
@@ -98,3 +101,33 @@ class LoginView(APIView):
             "token": token
         }
         return Response(data=data)
+
+
+class AddressView(ListCreateAPIView):
+    """新增、查询多地址"""
+    serializer_class = serializers.AddressSer
+
+    # 默认
+    # pagination_class = None
+    # 可以通过重写获取queryset
+    def get_queryset(self):
+        return Address.objects.filter(user=self.request.user)
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        serializers = self.get_serializer(queryset, many=True)
+        return Response({"addresses": serializers.data, "default_address_id": request.user.default_address_id})
+
+
+class DelAddressView(RetrieveDestroyAPIView):
+    serializer_class = serializers.AddressSer
+
+    def get_queryset(self):
+        return Address.objects.filter(user=self.request.user)
+
+
+class DefAddressView(UpdateAPIView):
+    serializer_class = serializers.UserDefSer
+
+    def get_object(self):
+        return self.request.user

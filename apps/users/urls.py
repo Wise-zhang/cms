@@ -23,5 +23,9 @@ urlpatterns = [
     url(r"^user_name/$", views.ValidateNameView.as_view()),  # 验证用户名
     url(r'^register/$', views.RegisterView.as_view()),  # 注册
     url(r'^login/$', views.LoginView.as_view()),  # 登录
+
+    url(r'^address/$', views.AddressView.as_view()),  # 用户中心地址
+    url(r'^address/(?P<pk>\d+)$', views.DelAddressView.as_view()),  # 删除地址
+    url(r'^def_address/$', views.DefAddressView.as_view()),  # 设置默认地址
 ]
 
