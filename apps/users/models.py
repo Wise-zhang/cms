@@ -6,7 +6,7 @@ from utils.models import BaseModel
 
 class User(AbstractUser):
     """用户模型类"""
-    mobile = models.CharField(max_length=11, verbose_name='手机号')
+    mobile = models.CharField(max_length=11, verbose_name='手机号', unique=True)
     # mobile = models.CharField(max_length=11, unique=True, verbose_name='手机号')
     # 用户的默认地址,可以为空,
     default_address = models.ForeignKey('Address', related_name='users',

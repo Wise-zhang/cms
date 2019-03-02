@@ -95,8 +95,6 @@ class GoodsListView(ListAPIView):
         return good_query
 
 
-
-
 class GoodsDetailView(RetrieveAPIView):
     """
     商品详情页商品详细信息视图
@@ -111,3 +109,31 @@ class RecommendGoodsView(ListAPIView):
     """
     serializer_class = RecommendGoodsSerializer
     queryset = Goods.objects.filter(is_red=1, status=0).all()[0:4]
+
+
+class NavView(APIView):
+    """
+    根据商品ID查询父分类
+    """
+
+    def get(self, request, pk):
+        goods = Goods.objects.get(id=pk)
+        category = goods.category.title  # 当前商品的类别
+        category_id = goods.category.id  # 当前商品的类别
+
+        parent = GoodsCategory.objects.get(id=category_id)
+        parent_title = parent.parent.title
+        parent_id = parent.parent.id
+
+        data = {
+            "current": {
+                "id": category_id,
+                "title": category,
+            },
+            "parent": {
+                "id": parent_id,
+                "title": parent_title,
+            }
+        }
+
+        return Response(data=data)

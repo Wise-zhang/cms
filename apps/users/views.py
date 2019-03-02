@@ -3,6 +3,7 @@ import re
 
 from django_redis import get_redis_connection
 from redis import StrictRedis
+from rest_framework import serializers as s
 from rest_framework.generics import CreateAPIView, ListCreateAPIView, RetrieveDestroyAPIView, UpdateAPIView
 
 from rest_framework.response import Response
@@ -23,8 +24,8 @@ class ValidateNameView(APIView):
         username = request.data.get("username")
         user = User.objects.filter(username=username).all()
         if user:
-            return Response(data={"messages": "该用户名已经存在了"})
-        return Response(data={"messages": "OK"})
+            raise s.ValidationError(detail="重复的用户名！")
+        return Response(data={"messages": "用户名可用！"})
 
 
 class SendMobileCodeView(APIView):

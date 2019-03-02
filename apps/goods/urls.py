@@ -23,4 +23,6 @@ urlpatterns = [
     url(r'^list/$', views.GoodsListView.as_view()),
     url(r'^(?P<pk>\d+)/detail/$', views.GoodsDetailView.as_view()),
     url(r'^detail/recommendation$', views.RecommendGoodsView.as_view()),
+
+    url(r'^detail/nav/(?P<pk>\d+)$', views.NavView.as_view()),
 ]
