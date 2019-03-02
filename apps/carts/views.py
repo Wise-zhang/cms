@@ -201,3 +201,35 @@ class CartSelectView(APIView):
                 redis_conn.srem('cart_select_%s' % user.id, *sku_id_list)
             return Response({'message': 'OK'})
 
+
+class CartCountView(APIView):
+    """购物车全选"""
+    def perform_authentication(self, request):
+        """
+        这个函数主要是为了解决：用户未登录时，添加购物车报错的问题
+        Perform authentication on the incoming request.
+
+        Note that if you override this and simply 'pass', then authentication
+        will instead be performed lazily, the first time either
+        `request.user` or `request.auth` is accessed.
+        """
+        # drf框架在视图执行前会调用此方法进行身份认证(jwt认证)
+        # 如果认证不通过, 则会抛异常返回401状态码
+        # 抛异常会导致视图无法执行，可以在此处捕获异常
+        try:
+            super().perform_authentication(request)   # 此方法是父类APIView的方法
+        except Exception as e:
+            print("错误信息error", e)
+
+    def get(self, request):
+        user = request.user
+        if user.is_authenticated:
+            # 获取用户所有的商品的键的列表的和
+            redis_conn = get_redis_connection('cart')
+            cart = redis_conn.hgetall('cart_%s' % user.id)
+            sku_id_list = cart.keys()
+            total_count = len(sku_id_list)
+            data = {
+                total_count: total_count
+            }
+            return Response(data=data)
