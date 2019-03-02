@@ -9,7 +9,7 @@
     <script type="text/javascript" src="js/jquery.jqzoom.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/picture.js"></script>
-    <script type="text/javascript" src="js/cart.js"></script>
+
 	<script type="text/javascript" src="js/date.js"></script>
 
     <script type="text/javascript">
@@ -106,8 +106,8 @@
                                             <input id="commodityGoodsId" type="hidden" value="0"/>
                                             <input id="commoditySelectNum" type="text" maxlength="9" value="1"
                                                    maxValue="198" onkeydown="return checkNumber(event);"/>
-                                            <a class="add" onclick="addCartNum(1);">+</a>
-                                            <a class="remove" onclick="addCartNum(-1);">-</a>
+                                            <a class="add" onclick="on_increment(1);">+</a>
+                                            <a class="remove" onclick="on_decrement(-1);">-</a>
                                         </div>
                                         <span class="stock-txt">
                                             库存<em id="commodityStockNum">{{ goods.stock }}</em>件
@@ -227,6 +227,7 @@
 
 <script src="js/axios-0.18.0.min.js"></script>
 <script src="js/vue-2.5.16.js"></script>
+<script type="text/javascript" src="js/cart.js"></script>
 <script src="js/goods_detail.js"></script>
 
 </body>

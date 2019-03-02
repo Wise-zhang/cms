@@ -9,7 +9,7 @@ class CartSerializer(serializers.Serializer):
     """
     sku_id = serializers.IntegerField(label='商品id', min_value=1)
     count = serializers.IntegerField(label='数量', min_value=1)
-    selected = serializers.BooleanField(label='是否勾选', default=False)
+    select = serializers.BooleanField(label='是否勾选', default=False)
 
     def validate(self, attrs):
         try:
@@ -22,11 +22,11 @@ class CartSerializer(serializers.Serializer):
 class CartGoodsSerializer(serializers.ModelSerializer):
     # 增加两个序列化的字段
     count = serializers.IntegerField(label='数量', min_value=1)
-    selected = serializers.BooleanField(label='是否勾选', default=False)
+    select = serializers.BooleanField(label='是否勾选', default=False)
 
     class Meta:   # 元类
         model = Goods
-        fields = ('id', 'count', 'title', 'img_url', 'sell_price', 'selected')
+        fields = ('id', 'count', 'title', 'img_url', 'sell_price', 'select')
 
 
 class CartDeleteSerializer(serializers.Serializer):

@@ -43,7 +43,7 @@ class CartView(APIView):
 
         sku_id = serializer.validated_data['sku_id']
         count = serializer.validated_data['count']
-        selected = serializer.validated_data['selected']
+        select = serializer.validated_data['select']
 
         # 保存用户的购物车选择
         user = request.user  # 用户都可以从request里获取
@@ -53,8 +53,8 @@ class CartView(APIView):
             pl = redis_conn.pipeline()  # 管道操作提高性能
             # 增加购物车商品数量
             pl.hincrby('cart_%s' % user.id, sku_id, count)
-            if selected:  # 保存商品勾选状态
-                pl.sadd('cart_selected_%s' % user.id, sku_id)
+            if select:  # 保存商品勾选状态
+                pl.sadd('cart_select_%s' % user.id, sku_id)
             pl.execute()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
@@ -92,6 +92,8 @@ class CartView(APIView):
         #     response.set_cookie('cart', cookie_cart, 30*24*3600)
         #     return response
 
+        return Response(status=301)
+
     def get(self, request):
         """获取用户购物车所有的商品"""
         user = request.user
@@ -123,10 +125,13 @@ class CartView(APIView):
             serializer = CartGoodsSerializer(skus, many=True)
             print(serializer.data)
             return Response(serializer.data)
+        return Response(status=301)
+
+
 
     def delete(self, request):
 
-        serializer = CartDeleteSerializer(request.data)
+        serializer = CartDeleteSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         # 获取sku_id
         sku_id = serializer.validated_data.get('sku_id')
@@ -140,6 +145,8 @@ class CartView(APIView):
             pl.srem('cart_select_%s' % user.id, sku_id)
             pl.execute()
             return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=301)
+
 
     def put(self, request):
         """修改购物车数据"""
@@ -164,6 +171,7 @@ class CartView(APIView):
                 pl.srem('cart_select_%s' % user.id, sku_id)
             pl.execute()
             return Response(serializer.data)
+        return Response(status=301)
 
 
 class CartSelectView(APIView):
@@ -200,10 +208,11 @@ class CartSelectView(APIView):
             else:  # 取消全选
                 redis_conn.srem('cart_select_%s' % user.id, *sku_id_list)
             return Response({'message': 'OK'})
+        return Response(status=301)
 
 
 class CartCountView(APIView):
-    """购物车全选"""
+    """购物车数量"""
     def perform_authentication(self, request):
         """
         这个函数主要是为了解决：用户未登录时，添加购物车报错的问题
@@ -230,6 +239,7 @@ class CartCountView(APIView):
             sku_id_list = cart.keys()
             total_count = len(sku_id_list)
             data = {
-                total_count: total_count
+                "total_count": total_count
             }
             return Response(data=data)
+        return Response({"status": 301})

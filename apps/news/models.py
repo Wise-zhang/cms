@@ -36,10 +36,12 @@ class News(BaseModel):
 
 
 class NewsAlbum(Album):
+
     """新闻图片"""
 
     # 外键: 所属新闻
-    news = models.ForeignKey('News')
+    # django==1.11.11以下的外间会要求on_delete=models.CASCADE
+    news = models.ForeignKey('News', verbose_name = '新闻')
 
     class Meta(object):
         db_table = 't_news_album'

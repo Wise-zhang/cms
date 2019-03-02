@@ -1,5 +1,5 @@
 ﻿var vm = new Vue({
-    el: '#apps',
+    el: '#app',
     data: {
         host: 'http://127.0.0.1:8000',
         goods_list: [],         // 购物车中的商品
@@ -92,7 +92,7 @@
                 //}
                 })
                 .catch(error =>{
-                    console.log(error.response.data);
+                    console.log(error.response);
                 })
         },
 
