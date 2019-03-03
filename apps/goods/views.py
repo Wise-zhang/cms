@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 
 from goods.models import GoodsCategory, Goods
 from goods.serializers import GoodsSerializer, CategorySerializer, GoodListSerializer, GoodDetailSerializer, \
-    RecommendGoodsSerializer
+    RecommendGoodsSerializer, PareCategory
 
 
 class GoodsIndexTopView(APIView):
@@ -137,3 +137,13 @@ class NavView(APIView):
         }
 
         return Response(data=data)
+
+
+class ListNavView(APIView):
+    def get(self, request):
+        category_id = request.query_params['category_id']
+        category = GoodsCategory.objects.get(id=category_id)
+        serializer = PareCategory(instance=category)
+        return Response(serializer.data)
+
+

@@ -8,6 +8,9 @@ var vm = new Vue({
         ordering: 'create_time',
         // 当前类别
         category: null,
+
+        // 面包屑导航
+        nav: null
     },
 
     mounted: function () {
@@ -28,6 +31,7 @@ var vm = new Vue({
 			//发送请求
             axios.get('http://127.0.0.1:8000/goods/list/'+query_string)
                 .then(response => {
+                    console.log(response.data)
                     this.goods_list = response.data;
                 })
                 .catch(function (error) {
@@ -40,6 +44,13 @@ var vm = new Vue({
             // 获取url中的类别id
             var category_id = this.get_query_string('category');
             //发送请求
+            axios.get("http://127.0.0.1:8000/goods/list/nav/?category_id=" + category_id)
+                .then(function (response) {
+                    vm.nav = response.data
+                })
+                .catch(function (error) {
+
+                })
         },
 
         // 获取url路径参数

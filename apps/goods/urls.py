@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^top/$', views.GoodsIndexTopView.as_view()),
     url(r'^sub/$', views.GoodsIndexSubView.as_view()),
     url(r'^list/$', views.GoodsListView.as_view()),
+    url(r'^list/nav/$', views.ListNavView.as_view()),  # 列表页面包屑导航
     url(r'^(?P<pk>\d+)/detail/$', views.GoodsDetailView.as_view()),
     url(r'^detail/recommendation$', views.RecommendGoodsView.as_view()),
 

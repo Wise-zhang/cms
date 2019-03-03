@@ -17,6 +17,9 @@ from users.models import User, Address
 from users.serializers import CreateUserSerializer
 
 
+
+
+
 class ValidateNameView(APIView):
     """校验用户名"""
 

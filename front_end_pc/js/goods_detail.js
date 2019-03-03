@@ -10,6 +10,7 @@ var vm = new Vue({
         goods_id: 0,         // 当前显示的商品id
 
         category: null,
+
     },
 
     mounted: function() {
