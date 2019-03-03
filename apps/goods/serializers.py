@@ -13,6 +13,11 @@ class SubCategory(ModelSerializer):
     class Meta:
         model = GoodsCategory
         fields = ('id', 'title',)
+class PareCategory(ModelSerializer):
+    parent=SubCategory(read_only=True)
+    class Meta:
+        model = GoodsCategory
+        fields = ('id', 'title','parent')
 
 
 class CategorySerializer(ModelSerializer):
@@ -37,10 +42,11 @@ class GoodsAlbumSerializer(ModelSerializer):
 
 class GoodDetailSerializer(ModelSerializer):
     goodsalbum_set = GoodsAlbumSerializer(many=True, read_only=True)
-
+    category=PareCategory(read_only=True)
     class Meta:
         model = Goods
-        fields = ('id', 'img_url', 'title', 'market_price', 'stock', 'sell_price', 'goods_no', 'sub_title', 'goodsalbum_set')
+        fields = ('id', 'img_url', 'title', 'market_price', 'stock', 'sell_price', 'goods_no', 'sub_title', 'goodsalbum_set','category')
+
 
 
 class RecommendGoodsSerializer(ModelSerializer):

@@ -4,6 +4,7 @@
         host: 'http://127.0.0.1:8000',
         goods_list: [],         // 购物车中的商品
         origin_input: 1,        // 商品数量
+        token : sessionStorage.token || localStorage.token,
     },
 
     computed: {
@@ -57,7 +58,7 @@
             //for (let i = 0; i < this.goods_list.length; i++) {
             //    this.goods_list[i].select = select;
             //}
-            axios.put('127.0.0.1:8000/cart/select', {
+            axios.put('http://127.0.0.1:8000/carts/select/', {
                 select:select
             },{
                 responseType: 'json',
@@ -78,7 +79,7 @@
 
         // 获取购物车商品数据
         get_cart_goods: function () {
-            axios.get('127.0.0.1:8000/carts/', {
+            axios.get('http://127.0.0.1:8000/carts/', {
                 headers: {
                     'Authorization': 'JWT ' + this.token
                 },
@@ -124,7 +125,7 @@
         // 更新购物车商品数量
         update_cart_count: function(goods_id, count, index) {
             //发送请求
-            axios.put('127.0.0.1/:8000/carts', {
+            axios.put('http://127.0.0.1:8000/carts/', {
                     sku_id: goods_id,
                     count,
                     select: this.goods_list[index].select
@@ -139,17 +140,17 @@
                     this.goods_list[index].count = response.data.count;
                 })
                 .catch(error =>{
-                    console.log(error.response.data);
+                    console.log(error.response);
                 })
         },
 
         // 删除购物车中的一个商品
         delete_goods: function(index){
             //发送请求
-            axios.delete('127.0.0.1:8000/carts/',{
+            axios.delete('http://127.0.0.1:8000/carts/',{
                 data:{
                     // delete 方法通过config的data传递参数
-                    sku_id: this.goods[index].id
+                    sku_id: this.goods_list[index].id
                 },
                 headers:{
                     'Authorization': 'JWT ' + this.token
@@ -160,7 +161,7 @@
                 .then(response =>{
                     //alert('删除购物车成功');
                     // 删除数组中的下标为index的元素
-                    this.goods.splice(index, 1);
+                    this.goods_list.splice(index, 1);
                 })
                 .catch(error =>{
                     console.log(error.response)
@@ -169,7 +170,7 @@
 
         //更新购物车的勾选状态
         update_select: function(index){
-            axios.put(this.host+'/cart/', {
+            axios.put(this.host+'/carts/', {
                     sku_id: this.goods_list[index].id,
                     count: this.goods_list[index].count,
                     select: this.goods_list[index].select
@@ -184,7 +185,7 @@
                     this.goods_list[index].select = response.data.select;
                 })
                 .catch(error =>{
-                    console.log(error.response.data)
+                    console.log(error.response)
                 })
         },
 

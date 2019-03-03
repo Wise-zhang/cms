@@ -4,6 +4,7 @@ var vm = new Vue({
         host: 'http://127.0.0.1:8000',
         goods: null,
         recommend_goods: null,
+        token : sessionStorage.token || localStorage.token,
 
         count: 1,            // 添加到购物车的商品数量
         goods_id: 0,         // 当前显示的商品id

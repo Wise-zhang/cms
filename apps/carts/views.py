@@ -56,6 +56,7 @@ class CartView(APIView):
             if select:  # 保存商品勾选状态
                 pl.sadd('cart_select_%s' % user.id, sku_id)
             pl.execute()
+            print(serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         # 未登陆情况下保存在cookies中,前端只考虑登陆状态下
