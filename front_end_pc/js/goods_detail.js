@@ -7,6 +7,8 @@ var vm = new Vue({
 
         count: 1,            // 添加到购物车的商品数量
         goods_id: 0,         // 当前显示的商品id
+
+        category: null,
     },
 
     mounted: function() {
@@ -31,7 +33,17 @@ var vm = new Vue({
                 })
                 .catch(function (error) {
                     console.log(error.response)
-                })
+                });
+
+            // 面包屑导航请求
+            axios.get("http://127.0.0.1:8000/goods/detail/nav/" + id)
+                    .then(function (response) {
+                        console.log(response.data);
+                        vm.category = response.data
+                    })
+                    .catch(function (error) {
+                        console.log(error.response)
+                    })
         },
 
         // 获取推荐商品
@@ -43,7 +55,9 @@ var vm = new Vue({
                 })
                 .catch(function (error) {
                     console.log(error.response)
-                })
+                });
+
+
         },
 
         addToCart: function() {
@@ -66,7 +80,8 @@ var vm = new Vue({
                         })
                     .catch(function(error){
                         console.log(error.response)
-                    })
+                    });
+
 
 
 

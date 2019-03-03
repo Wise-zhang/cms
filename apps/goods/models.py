@@ -7,9 +7,9 @@ class GoodsCategory(Category):
     """
     新闻多级分类
     """
-    # title = models.CharField(max_length=100, verbose_name='类别名称')
-    # sort_id = models.IntegerField(verbose_name='排序权重')
-    # parent = models.ForeignKey('self', verbose_name='父类别')
+    title = models.CharField(max_length=100, verbose_name='类别名称')
+    sort_id = models.IntegerField(verbose_name='排序权重')
+    parent = models.ForeignKey('self', verbose_name='父类别')
     class Meta(object):
         db_table = 't_goods_category'
         verbose_name = '商品分类'

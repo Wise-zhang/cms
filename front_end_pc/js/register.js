@@ -37,8 +37,24 @@ var vm = new Vue({
             var len = this.username.length;
             if (len < 5 || len > 20) {
                 this.error_name = true;
+                this.error_name_message = '请输入5-20个字符的用户名!'
             } else {
-                this.error_name = false;
+                axios.post("http://127.0.0.1:8000/users/user_name/", {
+                    username: this.username
+                })
+                    .then(function (response) {
+                        // 请求成功
+                        console.log(response);
+                        // vm.error_name_message = '用户名可用！';
+                        vm.error_name = false
+
+                    })
+                    .catch(function (error) {
+                        // 请求失败
+                        console.log(error.response.data[0]);
+                        vm.error_name_message = error.response.data[0];
+                        vm.error_name = true
+                    })
             }
         },
 
@@ -86,11 +102,11 @@ var vm = new Vue({
         },
 
         // 获取短信
-        get_sms_code: function() {
+        get_sms_code: function () {
             this.check_phone();
 
             if (!this.error_phone) {
-				//发送获取请求
+                //发送获取请求
                 axios.post("http://127.0.0.1:8000/users/mobile_code/", {
                     mobile: vm.mobile
                 })
@@ -98,7 +114,7 @@ var vm = new Vue({
                         console.log(response.data.messages);
                         alert(response.data.messages)
                     })
-				
+
             }
         },
 
@@ -116,7 +132,26 @@ var vm = new Vue({
                 && this.error_check_password === false
                 && this.error_phone === false
                 && this.error_allow === false) {
-				//发送注册请求
+                //发送注册请求
+                axios.post("http://127.0.0.1:8000/users/register/", {
+                    username: vm.username,
+                    password: vm.password,
+                    password_2: vm.password2,
+                    mobile: vm.mobile,
+                    sms_code: vm.sms_code,
+                    allow: true
+
+                })
+                    .then(function (response) {
+                        console.log(response);
+                        alert("注册成功");
+                        window.location.href = "/index.html"
+                    })
+                    .catch(function (error) {
+                        console.log(error.response.data);
+                        alert("注册失败")
+                    })
+
             } else {
                 alert('填写有误')
             }
