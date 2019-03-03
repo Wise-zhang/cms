@@ -50,12 +50,20 @@
         el: '#menu',
         data: {
             username: sessionStorage.username || localStorage.username,
-            total_count: 0
+            total_count: 0,
+            token : sessionStorage.token || localStorage.token,
         },
         mounted: function(){
             if(this.username!== undefined){
-            axios.get('http://127.0.0.1:8000/cart/count/')
+            axios.get('http://127.0.0.1:8000/cart/count/',{
+                responseType: 'json',
+                headers:{
+                    'Authorization': 'JWT ' + this.token
+                },
+                withCredentials: true
+            })
                 .then(response => {
+                    // alert(response.data.total_count);
                     this.total_count = response.data.total_count;
                 })}
         },
